@@ -20,3 +20,25 @@ S
 #src/main/webapp/css/loginSignup.css,e\8\e8ff8f85b0c4832ec6599485f65ac9e50dfb01b6
 W
 'src/main/webapp/images/waves-signup.svg,c\2\c2f80cbe11e076db1d61553431a062bab5c61dff
+L
+src/main/webapp/js/loader.js,a\e\aea64bb935b1bed6f5eb329dc3e5d9aeccadd09e
+Q
+!src/main/webapp/view/register.jsp,3\c\3cc7e2cdd8756fe16ce0b3c4aa476464b45babf9
+T
+$src/main/webapp/js/formController.js,f\3\f315f19dd65f8a490ea3d7505d66a101df150a22
+X
+(src/main/java/com/wearly/model/User.java,d\c\dcc437dee9040d6966de4d8197168bb7bc28b8fa
+c
+3src/main/java/com/wearly/model/PasswordHandler.java,5\3\5387ae39c82f2444ac25c0b59489b1223a1ca60a
+`
+0src/main/java/com/wearly/model/ImageHandler.java,b\3\b3577f3ad564027484dff4f9a5ce514ba5e0f699
+f
+6src/main/java/com/wearly/model/DatabaseConnection.java,f\4\f444f96b87d7363252670c1d8875087c70466ad6
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+O
+src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
