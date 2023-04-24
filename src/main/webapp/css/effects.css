@@ -1,0 +1,258 @@
+.featured_guy::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(
+			0,
+			0,
+			0,
+			0.3
+	); /* this creates a semi-transparent black overlay */
+	opacity: 0; /* start with opacity set to 0 so the overlay is invisible */
+	transition: opacity 0.3s ease-in-out; /* add a smooth transition for the opacity change */
+}
+
+.featured_guy:hover::before {
+	opacity: 1; /* increase the opacity to 1 on hover to make the overlay visible */
+}
+
+.featured_girl::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(
+			0,
+			0,
+			0,
+			0.3
+	); /* this creates a semi-transparent black overlay */
+	opacity: 0; /* start with opacity set to 0 so the overlay is invisible */
+	transition: opacity 0.3s ease-in-out; /* add a smooth transition for the opacity change */
+}
+
+.featured_girl:hover::before {
+	opacity: 1; /* increase the opacity to 1 on hover to make the overlay visible */
+}
+
+.text--blue {
+	color: #85c2ff;
+	transform: scale(1.1);
+}
+.portrait {
+	--splatted: "M232.5 256C225 251 209.5 262.5 224 281.5C232.736 292.948 238.561 297.756 251 290.5C257 287 256.114 271.924 250 264.5C243.886 257.076 240 261 232.5 256ZM147 92.5C118.738 94.6708 118 17 93 44C68 71 123.543 76.5 108 101.5C90.5 115 70.81 98.3664 64 115C56.7766 132.643 91.1967 136.948 90.5 156C89.4406 184.974 19.1766 161.499 24.5 190C29.9178 219.006 78.6461 172.635 100 193C130.207 221.808 1 248.5 58.5 291.5C94.5576 318.465 114.991 206.551 140.5 211C183.5 218.5 134.5 294 186.5 279.5C207.5 273 174.638 224.658 196 204C223.117 177.777 275.916 253 291.5 218.5C311.375 174.5 228.698 194.565 224 160C219.553 127.282 291.5 123.5 267.5 87.5C238.5 57 247 125.5 196 105.5C147 92.5 229.5 13.5 173.5 2.5C140.5 2.49999 183.532 89.694 147 92.5ZM45 92.5C36.8766 80.3149 14.1234 75.3149 6.00001 87.5C0.584412 95.6234 2.00001 120.357 14.5 115C27.9606 109.231 36.8766 124.685 45 112.5C50.4156 104.377 50.4156 100.623 45 92.5Z";
+}
+
+.portrait {
+	--splattier: "M161 188.375C170 193.5 177.919 193.854 186 188.375C197.919 180.294 197.919 159.581 186 151.5C177.919 146.021 169.081 146.021 161 151.5C149.081 159.581 152 183.25 161 188.375ZM145.5 70.5C127 70.5 112 24.5202 89.5 42C77.6254 51.2251 94.3244 85.6756 87.5 92.5C81.0365 98.9635 61.5 85.5 53.5 112C45.5 138.5 74.5 143.25 74.5 154C74.5 164.751 36.6441 162.082 39.5 185.5C42 206 86.5365 194.537 93 201C100.5 213.5 52 251.495 80 263.5C103 273.362 118 222.5 141 222.5C151.261 222.5 156.5 271.5 182.5 268C202.988 265.242 192.5 222.5 205.5 213.5C218.5 204.5 267.5 235 279.5 213.5C292.936 189.427 235.5 171 235.5 154C232.5 135.5 282.5 113.5 267.5 87.5C254.5 70.5 218 96 201.5 92.5C186 84 196 42 175.5 38C157.5 31.5 155.991 70.5 145.5 70.5ZM138 129C129.877 116.815 108.623 116.815 100.5 129C95.0844 137.123 95.0844 145.877 100.5 154C108.623 166.185 129.877 166.185 138 154C143.416 145.877 143.416 137.123 138 129Z";
+}
+.portrait {
+	--splat: "M161 188.375C170 193.5 177.919 193.854 186 188.375C197.919 180.294 197.919 159.581 186 151.5C177.919 146.021 169.081 146.021 161 151.5C149.081 159.581 152 183.25 161 188.375ZM141.5 59.5C131.26 59.5 117.936 45.0628 100.5 52C81.6499 59.5 86.0351 73.5325 78.5 85.5C70 99 57.9171 96.3659 49.5 115C40.4659 135 58.5 138 58.5 154C58.5 170 41 166.5 46.5 185.5C52 204.5 72.5 196 81.6499 209C94.5 218.5 81.6499 233.418 100.5 241.5C122.657 251 121.5 232 141.5 237C154.5 237 154.5 257 180.5 251C203.99 245.579 193.5 230 211 222.5C226.5 212.5 236.5 226 255 206C272.51 187.07 247.5 177 249 154C253 132.5 273.5 120 258.5 94C245.5 77 235 78.5 211 75.5C190.5 68 200 53 177.5 49.5C153.5 43.5 161 59.5 141.5 59.5ZM138 129C129.877 116.815 108.623 116.815 100.5 129C95.0844 137.123 95.0844 145.877 100.5 154C108.623 166.185 129.877 166.185 138 154C143.416 145.877 143.416 137.123 138 129Z";
+}
+
+.portrait {
+	background: rgb(249, 115, 22);
+	background: linear-gradient(
+			170deg,
+			rgba(249, 115, 22, 1) 0%,
+			rgba(251, 146, 60, 1) 100%
+	);
+	-webkit-clip-path: path(var(--clip, var(--splat)));
+	clip-path: path(var(--clip, var(--splat)));
+	transition: all 0.6s ease-in-out;
+	position: absolute;
+
+	top: -20rem;
+	left: 10%;
+	width: 35rem;
+	height: 35rem;
+	transform: scale(-47%);
+}
+
+.portrait-container {
+	position: relative;
+	cursor: pointer;
+}
+
+.product_card:hover .portrait {
+	--clip: var(--splattier);
+}
+
+.product_card:active .portrait {
+	transition: clip-path 0.1s !important;
+
+	--clip: var(--splatted);
+}
+
+/* .portrait:hover {
+	--clip: var(--splattier);
+}
+
+.portrait:active {
+	--clip: var(--splatted);
+} */
+
+.underline-effect {
+	background: linear-gradient(currentColor 0 0) var(--d, 201%) 100% /200% 2px no-repeat;
+	transition: 0.5s;
+}
+.underline-effect:hover {
+	--d: -101%;
+}
+
+/*
+Navigation Bar Dropdown
+*/
+
+.header__nav-item {
+	position: relative;
+}
+
+.dropdown-menu-navbar {
+	position: absolute;
+	top: 3rem;
+	left: 0;
+	z-index: 5;
+	display: none;
+	margin: 0;
+	list-style: none;
+	cursor: pointer;
+	padding-top: 2rem;
+}
+
+.dropdown-item {
+	display: block;
+	opacity: 0;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	padding: 6px 3rem 6px 1rem;
+}
+
+.dropdown-item:hover {
+	background-color: #f1f1f1;
+}
+
+.header__nav-item:hover .dropdown-menu-navbar {
+	display: block;
+}
+
+.dropdown-menu-navbar .dropdown_item-1 {
+	transform-origin: top center;
+	animation: slideDown 400ms 80ms ease-in-out forwards;
+}
+
+.dropdown-menu-navbar .dropdown_item-2 {
+	transform-origin: top center;
+	animation: slideDown 400ms 160ms ease-in-out forwards;
+}
+
+.dropdown-menu-navbar .dropdown_item-3 {
+	transform-origin: top center;
+	animation: slideDown 400ms 240ms ease-in-out forwards;
+}
+
+.header__nav-item:hover body {
+	filter: brightness(0.8);
+}
+
+@keyframes slideDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-60px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.loader-animated {
+	width: 48px;
+	height: 48px;
+	margin: auto;
+	position: absolute;
+	transition: all 0.4s ease-in;
+	z-index: 99;
+	top: 20%;
+	left: 48%;
+	/* display: none;
+	opacity: 0; */
+}
+
+/* .loader-animated.show {
+	display: block;
+	opacity: 1;
+} */
+
+.loader-animated:before {
+	content: "";
+	width: 48px;
+	height: 5px;
+	background: #0ea5e9;
+	position: absolute;
+	top: 60px;
+	left: 0;
+	border-radius: 50%;
+	animation: shadow 0.5s linear infinite;
+}
+
+.loader-animated:after {
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: #60a5fa;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-radius: 4px;
+	animation: jump 0.5s linear infinite;
+}
+
+@keyframes jump {
+	15% {
+		border-bottom-right-radius: 3px;
+	}
+
+	25% {
+		transform: translateY(9px) rotate(22.5deg);
+	}
+
+	50% {
+		transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+		border-bottom-right-radius: 40px;
+	}
+
+	75% {
+		transform: translateY(9px) rotate(67.5deg);
+	}
+
+	100% {
+		transform: translateY(0) rotate(90deg);
+	}
+}
+
+@keyframes shadow {
+	0%,
+	100% {
+		transform: scale(1, 1);
+	}
+
+	50% {
+		transform: scale(1.2, 1);
+	}
+}
+
+/* .dropdown-menu .dropdown_item-4 {
+  transform-origin: top center;
+  animation: slideDown 300ms 240ms ease-in-out forwards;
+}
+.dropdown-menu .dropdown_item-5 {
+  transform-origin: top center;
+  animation: slideDown 300ms 300ms ease-in-out forwards;
+} */

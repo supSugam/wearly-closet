@@ -1,0 +1,421 @@
+.section-admin-panel {
+    min-width: 100%;
+    min-height: 100vh;
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 16fr;
+    align-items: stretch;
+    justify-content: space-between;
+    overflow: hidden;
+    background: #fff;
+}
+
+.panel-wrapper {
+    width: 100%;
+    height: 100%;
+    margin-top: 4.2rem;
+}
+
+.option-for a {
+    text-decoration: none;
+}
+
+.option-for {
+    list-style-type: none;
+}
+
+.option-title div {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.navigate-option {
+    color: #374151;
+    font-size: 1.7rem;
+}
+
+.option-for:hover {
+    background: #f3f4f6;
+}
+
+.option-for {
+    padding: 1.6rem 0 1.6rem 5rem;
+    border-bottom: 1px solid #ebedf5;
+    cursor: pointer;
+}
+
+/*
+Table View
+*/
+
+.table-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4.6rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3.2rem 3rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.table-body {
+    display: block;
+    overflow-y: scroll;
+    width: 100%;
+    height: 37rem;
+}
+
+.customers-table,
+.products-table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 1rem;
+    overflow-x: auto;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table-container td,
+.table-container th {
+    padding: 8px;
+    text-align: center;
+}
+
+.table-container thead tr {
+    width: 98%;
+    display: table;
+    table-layout: fixed;
+    height: 6rem;
+    color: #374151;
+}
+
+.table-container tbody tr {
+    width: 100%;
+    display: table;
+    table-layout: auto;
+    height: 12rem;
+    font-size: 1.6rem;
+    color: #374151;
+}
+
+.table-container tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-container tbody tr:hover {
+    background-color: #ddd;
+}
+
+.products-table thead th:nth-child(1),
+.products-table tbody td:nth-child(1) {
+    width: 20%;
+}
+
+.products-table thead th:nth-child(2),
+.products-table tbody td:nth-child(2) {
+    width: 10%;
+}
+
+.products-table thead th:nth-child(3),
+.products-table tbody td:nth-child(3) {
+    width: 20%;
+}
+
+.products-table thead th:nth-child(4),
+.products-table tbody td:nth-child(4) {
+    width: 10%;
+}
+
+.products-table thead th:nth-child(5),
+.products-table tbody td:nth-child(5) {
+    width: 10%;
+}
+
+.products-table thead th:nth-child(6),
+.products-table tbody td:nth-child(6) {
+    width: 10%;
+}
+
+.products-table thead th:nth-child(7),
+.products-table tbody td:nth-child(7) {
+    width: 20%;
+}
+
+/* Add Product Form */
+
+.admin-tools-container {
+    width: 100%;
+    height: 128rem;
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    background: url(../images/table-background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding-top: 10rem;
+}
+.product-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-form-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    width: 90rem;
+    gap: 2rem 4rem;
+}
+
+.product-form-body .input-field-icon {
+    color: #4b5563;
+    position: absolute;
+    top: 22%;
+    left: 5%;
+    font-size: 1.8rem;
+}
+
+.product-form-body .input-field {
+    padding-left: 5.4rem;
+}
+
+.input-field-container .input-spinner {
+    position: absolute;
+    right: 3%;
+    top: 6%;
+    display: flex;
+    gap: -1rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-spinner button {
+    padding: 0;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.product-info-container {
+    width: 100%;
+    height: 86.4rem;
+    display: flex;
+    gap: 5rem;
+    flex-direction: column;
+}
+
+.product-category-field {
+    width: 100%;
+    height: 93rem;
+    background: #fff;
+    border-radius: 0.6rem;
+    border: 1px solid #00000020;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 19%);
+}
+
+.product-description-field {
+    min-height: 45%;
+}
+.product-description-field textarea {
+    width: 100%;
+    height: 100%;
+    padding: 5rem 2rem 4rem 3rem;
+    border-radius: 0.6rem;
+    font-size: 2rem;
+    color: #374151;
+    resize: none;
+    line-height: 2;
+    counter-reset: line;
+}
+
+.product-description-field .bullet-points {
+    display: flex;
+    opacity: 0;
+    flex-direction: column;
+    position: absolute;
+    top: 17%;
+    left: 4%;
+    gap: 2.3rem;
+    font-size: 1.8rem;
+    transition: all 0.3s ease-in;
+}
+
+.product-description-field textarea:focus + .bullet-points {
+    opacity: 0.5;
+}
+
+.product-description-field i.input-field-icon {
+    top: 5%;
+    left: 4%;
+}
+
+.product-upload-container {
+    width: 100%;
+    height: 36%;
+    color: inherit;
+    background-color: #f9fafb;
+    border-radius: 0.6rem;
+    border: 1px solid #00000020;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 19%);
+    padding: 3rem;
+}
+
+.product-upload {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    top: 0%;
+    right: 3%;
+    gap: 2rem;
+    margin-left: 2rem;
+}
+
+.product-upload .product-edit {
+    position: absolute;
+    z-index: 1;
+    top: 5rem;
+    left: 13rem;
+}
+
+.product-upload .product-edit input {
+    display: none;
+}
+
+.product-upload .product-edit input + label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #ffffff;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #4b5563;
+}
+.product-upload .product-edit input + label:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+}
+.product-upload .product-edit input + label:after {
+    content: "\f040";
+    font-family: "FontAwesome";
+    color: #757575;
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+}
+
+.product-upload .product-preview,.product-preview__edit {
+    width: 15rem;
+    height: 15rem;
+    position: relative;
+    border-radius: 100%;
+    border: 6px solid #d6d6d6;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    margin-left: 2.6rem;
+}
+
+.product-upload .product-preview > div,
+.product-preview__edit > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#imagePreview,#imagePreview-edit {
+    display: flex;
+    justify-content: center;
+}
+
+.product-preview:has(div.default-avatar) {
+    padding: 2rem;
+}
+
+.upload-title {
+    font-size: 2rem;
+    color: #374151;
+    font-weight: 600;
+}
+
+.upload-instruction-text {
+    color: #374151;
+}
+
+/*
+SHOW AND HIDE PRODUCT FORM
+*/
+
+/* .add-product-form {
+	display: none !important;
+	opacity: 0 !important;
+	transition: all 0.3s ease-in !important;
+}
+
+.add-product-form.show {
+	display: block !important;
+	opacity: 1 !important;
+	transition: all 0.3s ease-in !important;
+} */
+
+.hidden {
+    display: none !important;
+    opacity: 0 !important;
+    transition: all 0.3s ease-in !important;
+}
+.show {
+    display: block !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease-in !important;
+}
+
+.image-column {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.image-column img {
+    object-fit: cover;
+    width: 10rem;
+    height: 10rem;
+    top: 8%;
+    left: 5rem;
+    position: absolute;
+}
+.btn-action {
+    background: #4b5563;
+    color: #fff;
+    border: none;
+    padding: 1rem 1.4rem;
+    font-size: 1.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}
+/*
+Input Tags
+*/
