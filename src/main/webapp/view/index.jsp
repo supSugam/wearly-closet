@@ -32,12 +32,18 @@
     <link rel="stylesheet" href="../css/effects.css" />
     <link rel="stylesheet" href="../css/loginSignup.css" />
     <link rel="stylesheet" href="../css/searchPage.css" />
+    <link rel="stylesheet" href="../css/adminPanel.css"/>
 
     <script defer src="../js/effects.js"></script>
-    <script defer src="../js/profileDropdown.js"></script>
     <script defer src="../js/product-card-view.js"></script>
     <script defer src="../js/formController.js"></script>
     <script defer src="../js/loader.js"></script>
+    <c:if test="${userBean.isLoggedIn}">
+        <script defer src="../js/profileDropdown.js"></script>
+        <c:if test="${userBean.isAdmin}">
+        <script defer src="../js/adminPanel.js"></script>
+        </c:if>
+    </c:if>
 </head>
 <body>
 
@@ -167,7 +173,7 @@
 
         <div class="container product_cards--container">
         <c:forEach var="product" items="${productList}">
-            <div class="product_card">
+            <div class="product_card" data-id="${product.product_id}">
                 <div class="product_card--image">
                     <img
                             src="../images/product-images/${product.image_name}"
@@ -203,24 +209,34 @@
                             <div data-rating="${product.rating}" class="attribute-boxes product-rating"></div>
                         </li>
                     </ul>
+                    <p class="stock-quantity"><span class="stock-quantity-value">${product.stock_quantity}</span> Left in Stock.</p>
 
                     <div class="add-to-cart">
-                        <div class="quantity-input">
-                            <button class="quantity-btn minus">-</button>
-                            <input
-                                    class="quantity-value"
-                                    type="number"
-                                    value="1"
-                                    min="1"
-                                    max="10"
-                                    readonly
-                            />
-                            <button class="quantity-btn plus">+</button>
-                        </div>
+                        <c:choose>
+                            <c:when test="${userBean.isLoggedIn && userBean.isAdmin}">
+                                <button data-id="${product.product_id}" class="btn btn-action btn--editProduct">Edit</button>
+                                <button data-id="${product.product_id}" class="btn btn-action btn--deleteProduct">Delete</button>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="quantity-input">
+                                    <button class="quantity-btn minus">-</button>
+                                    <input
+                                            class="quantity-value"
+                                            type="number"
+                                            value="1"
+                                            min="1"
+                                            max="${product.stock_quantity}"
+                                            readonly
+                                    />
+                                    <button class="quantity-btn plus">+</button>
+                                </div>
 
-                        <button class="btn btn--cart">
-                            Add to Cart <i class="ph-fill ph-shopping-cart"></i>
-                        </button>
+                                <button class="btn btn--cart">
+                                    Add to Cart <i class="ph-fill ph-shopping-cart"></i>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                 </div>
             </div>

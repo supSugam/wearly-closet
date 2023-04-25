@@ -467,7 +467,7 @@ Section Products !!!
 
 	/* experimental */
 	display: grid;
-	grid-template-rows: 1.1fr 1fr;
+	grid-template-rows: 1.1fr 1.3fr;
 	grid-auto-columns: 1fr;
 }
 

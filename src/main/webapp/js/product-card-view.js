@@ -47,11 +47,26 @@ const displayStarRating = function (value) {
 document.addEventListener("DOMContentLoaded", function () {
 	cartQuantityHandler();
 
+	document.querySelectorAll(".product_card").forEach((card) => {
+		const ratingContainer = card.querySelector(".product-rating");
+		const ratingValue = +ratingContainer.dataset.rating;
+		ratingContainer.innerHTML = displayStarRating(ratingValue);
+
+
+		if (+card.querySelector(".stock-quantity-value").textContent === 0) {
+			card.querySelector(".add-to-cart").disabled = true;
+			card.querySelector(".quantity-input").querySelectorAll("*").forEach((el)=>{
+				el.disabled=true;
+				if(el.classList.contains("quantity-value")){
+					el.value=0;
+				}
+			});
+			card.querySelector(".stock-quantity").textContent = "Out of stock";
+			card.querySelector(".stock-quantity").style.color = "#dc2626";
+		}
+	});
+
 });
 
-document.querySelectorAll(".product_card").forEach((card) => {
-	const ratingContainer = card.querySelector(".product-rating");
-	const ratingValue = +ratingContainer.dataset.rating;
-	ratingContainer.innerHTML = displayStarRating(ratingValue);
-});
+
 
