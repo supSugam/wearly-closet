@@ -38,6 +38,7 @@
     <script defer src="../js/product-card-view.js"></script>
     <script defer src="../js/formController.js"></script>
     <script defer src="../js/loader.js"></script>
+    <script defer src="../js/addToCart.js"></script>
     <c:if test="${userBean.isLoggedIn}">
         <script defer src="../js/profileDropdown.js"></script>
         <c:if test="${userBean.isAdmin}">
@@ -161,6 +162,81 @@
             </div>
         </div>
     </section>
+    <div id="overlay"></div>
+    <dialog class="modal-popup open-popup" id="login-modal">
+        <button class="btn btn--close" type="button">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="popup-box">
+            <div class="popup-content">
+                <h2 class="popup-heading">Login to Continue<br />🙂</h2>
+                <div class="form-container">
+                    <form
+                            class="login-form"
+                            action=""
+                            method="post"
+                            onsubmit="return validateLoginForm()"
+                            novalidate=""
+                    >
+                        <div class="email-field input-field-container">
+                            <span class="error-message">This field cannot be empty</span>
+                            <i
+                                    class="fa-solid fa-envelope input-field-icon login-email"
+                            ></i>
+                            <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    required=""
+                                    class="input-field"
+                            />
+                        </div>
+
+                        <div class="password-field input-field-container">
+                            <span class="error-message">This field cannot be empty</span>
+                            <i class="fa-solid fa-key input-field-icon login-pass"></i>
+                            <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    required=""
+                                    class="input-field"
+                            />
+                        </div>
+
+                        <div class="exp">
+                            <div class="checkbox">
+                                <div>
+                                    <input
+                                            type="checkbox"
+                                            id="check"
+                                            name="check"
+                                            class="terms-checkbox"
+                                            value=""
+                                    />
+                                    <label class="label-checkmark" for="check">
+                                        <span class="checkmark"></span>
+                                        <p>Remember Me</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                                type="submit"
+                                class="btn btn-primary btn-login submit-button"
+                        >
+                            Login
+                        </button>
+                    </form>
+                    <div class="redirect-text to-signup">
+                        <p>Don't have an account?</p>
+                        <a class="redirect-sign-up" href="register.jsp">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
 
     <section class="section-product_cards">
         <div class="featured-heading container">
@@ -173,7 +249,7 @@
 
         <div class="container product_cards--container">
         <c:forEach var="product" items="${productList}">
-            <div class="product_card" data-id="${product.product_id}">
+            <div data-id="${product.product_id}" class="product_card" >
                 <div class="product_card--image">
                     <img
                             src="../images/product-images/${product.image_name}"
@@ -231,7 +307,7 @@
                                     <button class="quantity-btn plus">+</button>
                                 </div>
 
-                                <button class="btn btn--cart">
+                                <button data-isloggedin="${userBean.isLoggedIn}" type="button" class="btn btn--cart">
                                     Add to Cart <i class="ph-fill ph-shopping-cart"></i>
                                 </button>
                             </c:otherwise>

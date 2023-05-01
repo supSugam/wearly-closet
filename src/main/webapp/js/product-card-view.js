@@ -52,6 +52,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		const ratingValue = +ratingContainer.dataset.rating;
 		ratingContainer.innerHTML = displayStarRating(ratingValue);
 
+		card.querySelector(".add-to-cart").addEventListener("click", (e) => {
+			 let btnCart;
+			e.target.classList.contains("btn--cart") ? btnCart = e.target : btnCart = e.target.closest(".btn--cart");
+			addItemToCart(btnCart.dataset.isLoggedIn, btnCart.closest(".product_card"), btnCart.dataset.id)
+		});
+
 
 		if (+card.querySelector(".stock-quantity-value").textContent === 0) {
 			card.querySelector(".add-to-cart").disabled = true;
@@ -65,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			card.querySelector(".stock-quantity").style.color = "#dc2626";
 		}
 	});
+
+
 
 });
 

@@ -1,5 +1,5 @@
     const overlay = document.querySelector("#overlay");
-    const okButton = document.querySelectorAll(".btn--modal");
+    const okButton = document.querySelectorAll(".btn--modal, .btn--close");
 
     const openPopup = function (popup) {
         popup.classList.add("open-popup");
