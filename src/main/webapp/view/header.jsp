@@ -86,7 +86,7 @@
                         <a href="#" class="header__nav-link">
                             <i class="fa-solid fa-heart"></i>
                         </a>
-                        <a href="#" class="header__nav-link">
+                        <a href="cart.jsp" class="header__nav-link">
                             <i class="fa-solid fa-shopping-cart"></i>
                         </a>
                         <a href="#" class="header__nav-link">
@@ -155,7 +155,7 @@
 <%--                    </ul>--%>
                 </c:when>
                 <c:otherwise>
-                    <button class="btn btn-primary margin-left">Login</button>
+                    <a href="login.jsp" class="btn btn-primary margin-left btn--login">Login</a>
                 </c:otherwise>
             </c:choose>
         </div>

@@ -47,31 +47,90 @@ const displayStarRating = function (value) {
 document.addEventListener("DOMContentLoaded", function () {
 	cartQuantityHandler();
 
-	document.querySelectorAll(".product_card").forEach((card) => {
-		const ratingContainer = card.querySelector(".product-rating");
+
+	const productStarsGenerator = function (productContainer) {
+
+		const ratingContainer = productContainer.querySelector(".product-rating");
+		if(!ratingContainer) return;
 		const ratingValue = +ratingContainer.dataset.rating;
 		ratingContainer.innerHTML = displayStarRating(ratingValue);
+	}
 
-		card.querySelector(".add-to-cart").addEventListener("click", (e) => {
-			 let btnCart;
-			e.target.classList.contains("btn--cart") ? btnCart = e.target : btnCart = e.target.closest(".btn--cart");
-			addItemToCart(btnCart.dataset.isLoggedIn, btnCart.closest(".product_card"), btnCart.dataset.id)
-		});
+	const productDetailsHandler = function (productCard) {
 
-
-		if (+card.querySelector(".stock-quantity-value").textContent === 0) {
-			card.querySelector(".add-to-cart").disabled = true;
-			card.querySelector(".quantity-input").querySelectorAll("*").forEach((el)=>{
+		if (+productCard.querySelector(".stock-quantity-value").textContent === 0) {
+			productCard.querySelector(".btn--cart").disabled = true;
+			productCard.querySelector(".quantity-input").querySelectorAll("*").forEach((el)=>{
 				el.disabled=true;
 				if(el.classList.contains("quantity-value")){
 					el.value=0;
 				}
 			});
-			card.querySelector(".stock-quantity").textContent = "Out of stock";
-			card.querySelector(".stock-quantity").style.color = "#dc2626";
+			productCard.querySelector(".btn--cart").classList.add("disabled");
+			productCard.querySelector(".stock-quantity").textContent = "Out of stock";
+			productCard.querySelector(".stock-quantity").style.color = "#dc2626";
 		}
-	});
+		productCard.querySelector(".btn--cart").addEventListener("click", (e) => {
+			let btnCart;
+			e.target.classList.contains("btn--cart") ? btnCart = e.target : btnCart = e.target.closest(".btn--cart");
+			if(btnCart.disabled) return;
+			if(productCard.classList.contains("product-container")){
+				addItemToCart(btnCart,false)
+			}
+			if(productCard.classList.contains("product_card")){
+				addItemToCart(btnCart);
+			}
+		});
+		productCard.addEventListener("click", (e) => {
+			if(e.target.classList.contains("product-title")){
+				viewProductDetails(productCard.dataset.id, e.target.textContent);
+			}
+		});
+	}
+	const productContainer = document.querySelector(".product-container");
+	if(productContainer){
+		productStarsGenerator(productContainer);
+		productDetailsHandler(productContainer);
+	} else {
+		document.querySelectorAll(".product_card").forEach((card) => {
+			productStarsGenerator(card);
+			productDetailsHandler(card);
+		});
+	}
 
+
+	// document.querySelectorAll(".product_card").forEach((card) => {
+	// 	const ratingContainer = card.querySelector(".product-rating");
+	// 	const ratingValue = +ratingContainer.dataset.rating;
+	// 	ratingContainer.innerHTML = displayStarRating(ratingValue);
+	//
+	//
+	// 	if (+card.querySelector(".stock-quantity-value").textContent === 0) {
+	// 		card.querySelector(".btn--cart").disabled = true;
+	// 		card.querySelector(".quantity-input").querySelectorAll("*").forEach((el)=>{
+	// 			el.disabled=true;
+	// 			if(el.classList.contains("quantity-value")){
+	// 				el.value=0;
+	// 			}
+	// 		});
+	// 		card.querySelector(".btn--cart").classList.add("disabled");
+	// 		card.querySelector(".stock-quantity").textContent = "Out of stock";
+	// 		card.querySelector(".stock-quantity").style.color = "#dc2626";
+	// 	}
+	//
+	// 	card.querySelector(".btn--cart").addEventListener("click", (e) => {
+	// 		let btnCart;
+	// 		e.target.classList.contains("btn--cart") ? btnCart = e.target : btnCart = e.target.closest(".btn--cart");
+	// 		if(btnCart.disabled) return;
+	// 		addItemToCart(btnCart)
+	// 	});
+	//
+	// 	card.addEventListener("click", (e) => {
+	// 		if(e.target.classList.contains("product-title")){
+	// 			viewProductDetails(card.dataset.id, e.target.textContent);
+	// 		}
+	// 	});
+	// });
 
 
 });

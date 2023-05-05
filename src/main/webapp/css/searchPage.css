@@ -33,21 +33,21 @@
 .grey-gradient {
 	background: hsla(220, 14%, 96%, 1);
 	background: linear-gradient(
-		45deg,
-		hsla(220, 14%, 96%, 1) 0%,
-		hsla(210, 20%, 98%, 1) 100%
+			45deg,
+			hsla(220, 14%, 96%, 1) 0%,
+			hsla(210, 20%, 98%, 1) 100%
 	);
 
 	background: -moz-linear-gradient(
-		45deg,
-		hsla(220, 14%, 96%, 1) 0%,
-		hsla(210, 20%, 98%, 1) 100%
+			45deg,
+			hsla(220, 14%, 96%, 1) 0%,
+			hsla(210, 20%, 98%, 1) 100%
 	);
 
 	background: -webkit-linear-gradient(
-		45deg,
-		hsla(220, 14%, 96%, 1) 0%,
-		hsla(210, 20%, 98%, 1) 100%
+			45deg,
+			hsla(220, 14%, 96%, 1) 0%,
+			hsla(210, 20%, 98%, 1) 100%
 	);
 
 	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F3F4F6", endColorstr="#F9FAFB", GradientType=1 );
@@ -471,4 +471,5 @@ Search Result
 	grid-template-rows: auto;
 	gap: 6rem;
 	padding: 4rem;
+	overflow-y: scroll;
 }

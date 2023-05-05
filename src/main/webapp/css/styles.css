@@ -461,8 +461,7 @@ Section Products !!!
 	background-color: #fff;
 	position: relative;
 	border: 0.01rem solid #0000002c;
-	min-height: 50rem;
-	max-height: 52rem;
+	height:52rem;
 	width: 100%;
 
 	/* experimental */
@@ -532,7 +531,15 @@ Section Products !!!
 	color: #1f2937;
 	font-weight: 600;
 	gap: 1.8rem;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
 }
+.product-title:hover,
+.cart-item__title:hover {
+	color: #1e3a8a;
+	transform: scale(1.01);
+}
+
 
 .product-attributes .product-attribute:not(:first-child) {
 	gap: 3.6rem;
@@ -654,6 +661,7 @@ Quantity Box
 }
 
 .btn--cart {
+	width: 100%; /* Changed width 5/2/2023 */
 	background-color: #fff;
 	color: #000;
 	font-size: 1.7rem;
@@ -670,11 +678,16 @@ Quantity Box
 	color: #fff;
 }
 
-.btn--cart:active,
-.btn--cart:focus {
-	background-color: #000;
-	color: #fff;
+.btn--cart.disabled:hover {
+	color: #000;
+	background-color: #fff;
 }
+
+/*.btn--cart:active,*/
+/*.btn--cart:focus {*/
+/*	background-color: #000;*/
+/*	color: #fff;*/
+/*}*/
 
 /* 
 
@@ -778,4 +791,31 @@ Footer
 	max-width: 120rem;
 	padding: 0 0 0 3.2rem;
 	margin: 0 auto;
+}
+
+
+/*
+Modal Buttons
+*/
+
+.modal__buttons{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1.8rem;
+}
+
+.modal__buttons .btn--cancel{
+	background-color: #e5e7eb;
+	color: #1f2937;
+}
+
+.modal__buttons .btn--cancel:hover{
+	background-color: #334155;
+	color: #fff;
+}
+
+.modal__buttons .btn--confirm{
+	background-color: #1f2937;
+	color: #fff;
 }

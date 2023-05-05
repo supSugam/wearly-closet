@@ -27,6 +27,7 @@ const removeError = function (inputField) {
 const projectPath = "http://localhost:8080/wearly-ecommerce";
 
 const validateLoginForm = function () {
+    console.log("validateLoginForm")
 
     const loginForm = document.querySelector(".login-form");
     const inputFields = loginForm.querySelectorAll(

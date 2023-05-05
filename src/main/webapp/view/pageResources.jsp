@@ -4,7 +4,7 @@
 <%@ page import="com.wearly.model.UserBean" %>
 
 
-    <jsp:useBean id="userBean" class="com.wearly.model.UserBean" scope="session" />
+<jsp:useBean id="userBean" class="com.wearly.model.UserBean" scope="session" />
 
 
 <meta charset="UTF-8" />

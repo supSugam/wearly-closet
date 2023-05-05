@@ -100,6 +100,8 @@
 .underline-effect {
 	background: linear-gradient(currentColor 0 0) var(--d, 201%) 100% /200% 2px no-repeat;
 	transition: 0.5s;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
 }
 .underline-effect:hover {
 	--d: -101%;

@@ -42,11 +42,20 @@ public class ProductDAO {
     }
 
 
-    public List<Product> getRandomProducts(int limit) {
+    public List<Product> getAllProductsDetails(int limit) {
         List<Product> productList = new ArrayList<>();
-        String sql = "SELECT p.product_id, p.product_name, p.description, p.price, p.image_name, p.rating, p.brand,p.stock_quantity, p.category_id, c.gender, c.category_name FROM product p JOIN category c ON p.category_id = c.category_id ORDER BY RAND() LIMIT ?";
+        String sql = "SELECT p.product_id, p.product_name, p.description, p.price, p.image_name, p.rating, p.brand,p.stock_quantity, p.category_id, c.gender, c.category_name FROM product p JOIN category c ON p.category_id = c.category_id ORDER BY RAND()";
+
+        // Check if a limit is provided and set the limit parameter in the SQL query
+        if (limit > 0) {
+            sql += " LIMIT ?";
+        }
+
         try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
-            ps.setInt(1, limit);
+            // Set the limit parameter if it's provided
+            if (limit > 0) {
+                ps.setInt(1, limit);
+            }
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
@@ -71,6 +80,7 @@ public class ProductDAO {
         }
         return productList;
     }
+
 
     public List<Product> getProductsList() {
         List<Product> productList = new ArrayList<>();
@@ -107,7 +117,7 @@ public class ProductDAO {
         try {
 
             // Prepare the SQL statement with a placeholder for the product id
-            String sql = "SELECT * FROM product WHERE product_id = ?";
+            String sql = "SELECT p.product_id, p.product_name, p.description, p.price, p.image_name, p.rating, p.brand,p.stock_quantity, p.category_id, c.gender, c.category_name FROM product p JOIN category c ON p.category_id = c.category_id WHERE p.product_id = ?";
             ps = this.conn.prepareStatement(sql);
 
             // Set the value of the placeholder to the product id passed in as a parameter
@@ -127,6 +137,9 @@ public class ProductDAO {
                 product.setBrand(rs.getString("brand"));
                 product.setStock_quantity(rs.getInt("stock_quantity"));
                 product.setCategory_id(rs.getInt("category_id"));
+                product.setGender(rs.getString("gender"));
+                product.setCategory_name(rs.getString("category_name"));
+
             }
 
 
@@ -160,6 +173,50 @@ public class ProductDAO {
             throw e;
         }
     }
+
+    public int getProductQuantity(int productId) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int quantity = 0;
+        try {
+
+            // Prepare the SQL statement with a placeholder for the product id
+            String sql = "SELECT stock_quantity FROM product WHERE product_id = ?";
+            ps = this.conn.prepareStatement(sql);
+
+            // Set the value of the placeholder to the product id passed in as a parameter
+            ps.setInt(1, productId);
+
+            // Execute the query and get the result set
+            rs = ps.executeQuery();
+
+            // If there is a row in the result set, extract the product data and create a Product object
+            if (rs.next()) {
+                quantity = rs.getInt("stock_quantity");
+            }
+
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            // Close the database resources
+            try { if (rs != null) rs.close(); } catch (SQLException e) { }
+            try { if (ps != null) ps.close(); } catch (SQLException e) { }
+            try { if (conn != null) conn.close(); } catch (SQLException e) { }
+        }
+        return quantity;
+    }
+
+//    public int updateProductQuantity(int productId, int quantity) throws SQLException {
+//        String sql = "UPDATE product SET stock_quantity=? WHERE product_id=?";
+//        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
+//            ps.setInt(1, quantity);
+//            ps.setInt(2, productId);
+//            int rowsAffected = ps.executeUpdate();
+//            return rowsAffected;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            throw e;
+//        }
 
 
 

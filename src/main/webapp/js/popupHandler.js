@@ -2,10 +2,10 @@
     const okButton = document.querySelectorAll(".btn--modal, .btn--close");
 
     const openPopup = function (popup) {
-        popup.classList.add("open-popup");
-        overlay.style.display = "block";
         document.body.classList.add("modal-open");
         document.body.style.overflow = "hidden";
+        popup.classList.add("open-popup");
+        overlay.style.display = "block";
     };
 
     const closePopup = function () {

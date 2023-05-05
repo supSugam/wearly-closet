@@ -15,7 +15,7 @@
 
 
 <%
-    List<Product> productList = new ProductDAO().getRandomProducts(8);
+    List<Product> productList = new ProductDAO().getAllProductsDetails(8);
     request.setAttribute("productList", productList);
 %>
 
@@ -39,6 +39,8 @@
     <script defer src="../js/formController.js"></script>
     <script defer src="../js/loader.js"></script>
     <script defer src="../js/addToCart.js"></script>
+    <script defer src="../js/viewProductDetails.js"></script>
+    <script defer src="../js/popupHandler.js"></script>
     <c:if test="${userBean.isLoggedIn}">
         <script defer src="../js/profileDropdown.js"></script>
         <c:if test="${userBean.isAdmin}">
@@ -163,7 +165,7 @@
         </div>
     </section>
     <div id="overlay"></div>
-    <dialog class="modal-popup open-popup" id="login-modal">
+    <dialog class="modal-popup" id="login-modal">
         <button class="btn btn--close" type="button">
             <i class="fa-solid fa-times"></i>
         </button>
@@ -307,7 +309,7 @@
                                     <button class="quantity-btn plus">+</button>
                                 </div>
 
-                                <button data-isloggedin="${userBean.isLoggedIn}" type="button" class="btn btn--cart">
+                                <button type="button" class="btn btn--cart">
                                     Add to Cart <i class="ph-fill ph-shopping-cart"></i>
                                 </button>
                             </c:otherwise>

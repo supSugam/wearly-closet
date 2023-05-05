@@ -62,6 +62,14 @@ body {
 .margin-left {
     margin-left: 2.4rem;
 }
+
+.btn.disabled{
+    opacity: 0.6;
+}
+
+.btn.disabled:hover {
+    cursor: not-allowed;
+}
 /*
 Reusable Typography
 */
@@ -191,7 +199,6 @@ Popup Message
     padding: 1.2rem 3.6rem;
     color: #f2f2f2;
     font-weight: 600;
-    font-size: 2rem;
     border-radius: 9px;
     border: none;
     background-color: #1f2937;
@@ -240,11 +247,11 @@ Popup Message
     position: absolute;
     bottom: 25rem;
     left: 18rem;
-    font-size: 2.4rem;
+    font-size: 2.6rem;
     color: #374151;
     cursor: pointer;
     z-index: 999;
-    padding: 6px 12px;
+    padding: 9px 12px;
     border-radius: 50%;
     box-shadow: 0px 0px 4px 1px #3741518e;
     transition: all 0.3s ease-out;
@@ -259,5 +266,30 @@ Popup Message
     background-color: #374151;
     transform: scale(1.1);
 }
+
+/* Simple Scrollbar */
+.scroll--simple::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.scroll--simple::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.scroll--simple::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.scroll--simple::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.scroll--simple::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.7);
+}
+
 
 

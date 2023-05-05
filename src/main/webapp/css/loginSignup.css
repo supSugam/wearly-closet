@@ -116,15 +116,15 @@
 .redirect-sign-up {
 	font-size: 1.6rem;
 	text-decoration: none;
-	color: #80bfff;
+	color: #2563eb;
 	padding: 0.4rem 1rem;
 	border-radius: 1rem;
-	border: 1px solid #80bfff;
+	border: 1px solid #2563eb;
 	transition: all 0.3s ease-in-out;
 }
 
 .redirect-sign-up:hover {
-	background-color: #80bfff;
+	background-color: #2563eb;
 	color: #fff;
 }
 
