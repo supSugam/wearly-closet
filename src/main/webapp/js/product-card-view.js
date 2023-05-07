@@ -1,4 +1,4 @@
-"use strict";
+
 
 const cartQuantityHandler = function () {
 	const quantityInputs = document.querySelectorAll(".quantity-input");
@@ -44,10 +44,8 @@ const displayStarRating = function (value) {
 	return starsHtml;
 };
 
-document.addEventListener("DOMContentLoaded", function () {
+const productCardInit = function () {
 	cartQuantityHandler();
-
-
 	const productStarsGenerator = function (productContainer) {
 
 		const ratingContainer = productContainer.querySelector(".product-rating");
@@ -93,47 +91,19 @@ document.addEventListener("DOMContentLoaded", function () {
 		productDetailsHandler(productContainer);
 	} else {
 		document.querySelectorAll(".product_card").forEach((card) => {
+			console.log("Product Card Init");
 			productStarsGenerator(card);
 			productDetailsHandler(card);
 		});
 	}
 
 
-	// document.querySelectorAll(".product_card").forEach((card) => {
-	// 	const ratingContainer = card.querySelector(".product-rating");
-	// 	const ratingValue = +ratingContainer.dataset.rating;
-	// 	ratingContainer.innerHTML = displayStarRating(ratingValue);
-	//
-	//
-	// 	if (+card.querySelector(".stock-quantity-value").textContent === 0) {
-	// 		card.querySelector(".btn--cart").disabled = true;
-	// 		card.querySelector(".quantity-input").querySelectorAll("*").forEach((el)=>{
-	// 			el.disabled=true;
-	// 			if(el.classList.contains("quantity-value")){
-	// 				el.value=0;
-	// 			}
-	// 		});
-	// 		card.querySelector(".btn--cart").classList.add("disabled");
-	// 		card.querySelector(".stock-quantity").textContent = "Out of stock";
-	// 		card.querySelector(".stock-quantity").style.color = "#dc2626";
-	// 	}
-	//
-	// 	card.querySelector(".btn--cart").addEventListener("click", (e) => {
-	// 		let btnCart;
-	// 		e.target.classList.contains("btn--cart") ? btnCart = e.target : btnCart = e.target.closest(".btn--cart");
-	// 		if(btnCart.disabled) return;
-	// 		addItemToCart(btnCart)
-	// 	});
-	//
-	// 	card.addEventListener("click", (e) => {
-	// 		if(e.target.classList.contains("product-title")){
-	// 			viewProductDetails(card.dataset.id, e.target.textContent);
-	// 		}
-	// 	});
-	// });
-
-
+}
+document.addEventListener("DOMContentLoaded", function () {
+	productCardInit();
 });
+
+
 
 
 

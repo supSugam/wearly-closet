@@ -273,10 +273,10 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
             isValid = false;
             showError(inputField, `${inputField.placeholder} is required.`);
         } else {
-            if(inputField.name === "product-name" && formFor === "EditProductServlet" && inputField.value !== productInfoObj.product_name){
+            if (inputField.name === "product-name" && formFor === "EditProductServlet" && inputField.value !== productInfoObj.product_name) {
                 inputChanged = true;
             }
-            if(inputField.name === "product-brand" && formFor === "EditProductServlet" && inputField.value !== productInfoObj.brand){
+            if (inputField.name === "product-brand" && formFor === "EditProductServlet" && inputField.value !== productInfoObj.brand) {
                 inputChanged = true;
             }
 
@@ -284,20 +284,20 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
                 inputField.type === "number" &&
                 inputField.name === "product-quantity"
             ) {
-                if(formFor === "EditProductServlet" && +inputField.value !== productInfoObj.stock_quantity){
+                if (formFor === "EditProductServlet" && +inputField.value !== productInfoObj.stock_quantity) {
                     inputChanged = true;
                 }
 
-                }
-                if (inputField.value < 1) {
-                    isValid = false;
-                    showError(inputField, "Quantity must be atleast 1");
-                }
             }
+            if (inputField.value < 1) {
+                isValid = false;
+                showError(inputField, "Quantity must be atleast 1");
+            }
+
 
             if (inputField.type === "number" && inputField.name === "product-price") {
 
-                if(formFor === "EditProductServlet" && +inputField.value !== productInfoObj.price){
+                if (formFor === "EditProductServlet" && +inputField.value !== productInfoObj.price) {
                     inputChanged = true;
                 }
                 if (inputField.value < 100) {
@@ -307,7 +307,7 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
             }
 
             if (inputField.name === "product-description") {
-                if(formFor === "EditProductServlet" && inputField.value !== productInfoObj.description){
+                if (formFor === "EditProductServlet" && inputField.value !== productInfoObj.description) {
                     inputChanged = true;
                 }
                 if (inputField.value.length < 50) {
@@ -318,6 +318,7 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
                     );
                 }
             }
+        }
 
 
         descriptionText = descriptionField.value.split("\n").map((line) => {
@@ -384,44 +385,46 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
         productCategory: selectedCategory,
         productDescriptionText: descriptionString,
         newImage: imageChanged,
+        productImage: null,
     };
+    // create a Promise that resolves when the image is finished rendering
+    const imagePromise = new Promise((resolve) => {
+        if (formFor === "AddProductServlet" || imageChanged) {
+            const reader = new FileReader();
+            reader.readAsDataURL(imageInput.files[0]);
+            reader.onload = () => {
+                productObject.productImage = reader.result;
+                resolve();
+            };
+        } else if (formFor === "EditProductServlet") {
+            productObject.productId = +btnSubmit.dataset.id;
 
-    if(formFor === "AddProductServlet" || imageChanged){
-        const reader = new FileReader();
-        reader.readAsDataURL(imageInput.files[0]);
-        reader.onload = () => {
-            const imageDataUrl = reader.result;
-            productObject.productImage = imageDataUrl;
-        };
-    }
-    if(formFor === "EditProductServlet"){
-        productObject.productId = +btnSubmit.dataset.id;
-
-        if(!imageChanged){
-            productObject.productImage = productInfoObj.image_name;
+            if (!imageChanged) {
+                productObject.productImage = productInfoObj.image_name;
+            }
+            resolve();
+        } else {
+            // if no image is being added, resolve immediately
+            resolve();
         }
-    }
+    });
 
-        // const imageDataUrl = reader.result;
-        // // create an object to store the form data
-        // const productObject = {
-        //     productName: productName,
-        //     productPrice: productPrice,
-        //     productBrand: productBrand,
-        //     productQuantity: productQuantity,
-        //     productGender: selectedGender,
-        //     productCategory: selectedCategory,
-        //     productDescriptionText: descriptionString,
-        //     productImage: imageDataUrl,
-        //     newImage: imageChanged,
-        // };
-        // if(formFor === "EditProductServlet"){
-        //     productObject.productId = +btnSubmit.dataset.id;
-        //     if(!imageChanged){
-        //         productObject.productImage = productInfoObj.image_name;
-        //     }
-        // }
-        // convert the object to JSON using JSON.stringify()
+    // if(formFor === "EditProductServlet"){
+    //     productObject.productId = +btnSubmit.dataset.id;
+    //
+    //     if(!imageChanged){
+    //         productObject.productImage = productInfoObj.image_name;
+    //     }
+    // }
+    // if(formFor === "AddProductServlet" || imageChanged){
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(imageInput.files[0]);
+    //     reader.onload = () => {
+    //         productObject.productImage = reader.result;
+    //     };
+    // }
+
+    imagePromise.then(() => {
         const productDataJSON = JSON.stringify(productObject);
 
         // send POST request to servlet
@@ -457,6 +460,10 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
                 console.error("Error:", error);
             });
         return true;
+    });
+
+
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -519,3 +526,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Method to validate the form
+// const imageDataUrl = reader.result;
+// // create an object to store the form data
+// const productObject = {
+//     productName: productName,
+//     productPrice: productPrice,
+//     productBrand: productBrand,
+//     productQuantity: productQuantity,
+//     productGender: selectedGender,
+//     productCategory: selectedCategory,
+//     productDescriptionText: descriptionString,
+//     productImage: imageDataUrl,
+//     newImage: imageChanged,
+// };
+// if(formFor === "EditProductServlet"){
+//     productObject.productId = +btnSubmit.dataset.id;
+//     if(!imageChanged){
+//         productObject.productImage = productInfoObj.image_name;
+//     }
+// }
+// convert the object to JSON using JSON.stringify()

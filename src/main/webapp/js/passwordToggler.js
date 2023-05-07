@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		const btnToggle = document.querySelector(".toggle-password-view");
 		if (!btnToggle) return;
 		const signupForm = document.querySelector(".signup-form");
+		if(!signupForm) return;
 		let passwordInput = signupForm.querySelector("input[type=password]");
 
 		btnToggle.addEventListener("click", function () {

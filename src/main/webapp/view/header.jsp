@@ -47,7 +47,7 @@
 
     <div class="user__controls">
         <div class="header__search-box">
-            <form action="" class="search__form">
+            <form action="" class="search__form" id="productSearch__form">
                 <i
                         class="fa-solid fa-magnifying-glass form-icon gradient-text active"
                 ></i>
@@ -63,6 +63,7 @@
                         placeholder="Search here.."
                         required=""
                         autocomplete="off"
+                        id="productSearch__input"
                 />
             </form>
             <ul class="dropdown-menu-searchsuggestions">
@@ -73,7 +74,7 @@
                 <li class="dropdown-option" data-value="tshirt">
                     <i class="fa-light fa-magnifying-glass"></i>Tshirt
                 </li>
-                <li class="dropdown-option" data-value="formals">
+                <li class="dropdown-option" data-value="formalwear">
                     <i class="fa-light fa-magnifying-glass"></i>Formals
                 </li>
             </ul>
@@ -115,7 +116,7 @@
                         </c:if>
 
                         <c:if test="${userBean.isCustomer}">
-                            <a href="/orders">
+                            <a href="orders.jsp">
                                 <li class="dropdown-option">
                                     <i class="fa-solid fa-bags-shopping"></i> Your Orders
                                 </li>
@@ -123,13 +124,13 @@
                         </c:if>
 
 
-                        <a href="/reset-password">
+                        <a href="password.jsp">
                             <li class="dropdown-option">
                                 <i class="fa-solid fa-key"></i> Reset Password
                             </li>
                         </a>
 
-                        <a href="/logout">
+                        <a href="/wearly-ecommerce/LogOutServlet">
                             <li class="dropdown-option">
                                 <i class="fa-solid fa-right-from-bracket"></i> Log Out
                             </li>

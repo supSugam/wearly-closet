@@ -35,12 +35,15 @@
     <link rel="stylesheet" href="../css/adminPanel.css"/>
 
     <script defer src="../js/effects.js"></script>
-    <script defer src="../js/product-card-view.js"></script>
     <script defer src="../js/formController.js"></script>
     <script defer src="../js/loader.js"></script>
     <script defer src="../js/addToCart.js"></script>
     <script defer src="../js/viewProductDetails.js"></script>
     <script defer src="../js/popupHandler.js"></script>
+    <script defer src="../js/searchForm.js"></script>
+    <c:if test="${!userBean.isAdmin}">
+        <script defer src="../js/product-card-view.js"></script>
+    </c:if>
     <c:if test="${userBean.isLoggedIn}">
         <script defer src="../js/profileDropdown.js"></script>
         <c:if test="${userBean.isAdmin}">

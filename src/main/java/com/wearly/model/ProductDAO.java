@@ -145,11 +145,6 @@ public class ProductDAO {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            // Close the database resources
-            try { if (rs != null) rs.close(); } catch (SQLException e) { }
-            try { if (ps != null) ps.close(); } catch (SQLException e) { }
-            try { if (conn != null) conn.close(); } catch (SQLException e) { }
         }
 
         return product;
@@ -206,17 +201,118 @@ public class ProductDAO {
         return quantity;
     }
 
-//    public int updateProductQuantity(int productId, int quantity) throws SQLException {
-//        String sql = "UPDATE product SET stock_quantity=? WHERE product_id=?";
-//        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
-//            ps.setInt(1, quantity);
-//            ps.setInt(2, productId);
-//            int rowsAffected = ps.executeUpdate();
-//            return rowsAffected;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            throw e;
-//        }
+    public int getProductPrice(int productId) {
+        int price = 0;
+        String sql = "SELECT price FROM product WHERE product_id = ?";
+
+        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
+            ps.setInt(1, productId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    price = rs.getInt("price");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return price;
+    }
+    public boolean decreaseProductStock(int productId, int decreaseBy) throws SQLException {
+        try (PreparedStatement ps = conn.prepareStatement("UPDATE product SET stock_quantity = stock_quantity - ? WHERE product_id = ?")) {
+            ps.setInt(1, decreaseBy);
+            ps.setInt(2, productId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+
+
+    public List<String> getMatchingSuggestions(String searchTerm) {
+        List<String> matchingTerms = new ArrayList<>();
+        String sql = "SELECT category_name FROM category WHERE category_name LIKE ?";
+
+        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
+            ps.setString(1, "%" + searchTerm + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String categoryName = rs.getString("category_name");
+                matchingTerms.add(categoryName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        sql = "SELECT product_name FROM product WHERE product_name LIKE ?";
+
+        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
+            ps.setString(1, "%" + searchTerm + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String productName = rs.getString("product_name");
+                matchingTerms.add(productName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return matchingTerms;
+    }
+
+    public List<Product> getSortedResults(String sortBy, int limit) {
+        List<Product> productList = new ArrayList<>();
+        String sql = "SELECT p.product_id, p.product_name, p.description, p.price, p.image_name, p.rating, p.brand,p.stock_quantity, p.category_id, c.gender, c.category_name FROM product p JOIN category c ON p.category_id = c.category_id";
+
+        if (sortBy.equals("ratings")) {
+            sql += " ORDER BY p.rating DESC";
+        } else if (sortBy.equals("priceHigh")) {
+            sql += " ORDER BY p.price DESC";
+        } else if (sortBy.equals("priceLow")) {
+            sql += " ORDER BY p.price ASC";
+        } else {
+            sql += " ORDER BY RAND()";
+        }
+
+        if (limit > 0) {
+            sql += " LIMIT ?";
+        }
+
+        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
+            if (limit > 0) {
+                ps.setInt(1, limit);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Product product = new Product();
+                    product.setProduct_id(rs.getInt("product_id"));
+                    product.setProduct_name(rs.getString("product_name"));
+                    product.setDescription(rs.getString("description"));
+                    product.setPrice(rs.getInt("price"));
+                    product.setImage_name(rs.getString("image_name"));
+                    product.setRating(rs.getDouble("rating"));
+                    product.setBrand(rs.getString("brand"));
+                    product.setStock_quantity(rs.getInt("stock_quantity"));
+                    product.setGender(rs.getString("gender"));
+                    product.setCategory_name(rs.getString("category_name"));
+                    productList.add(product);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productList;
+    }
+
 
 
 
