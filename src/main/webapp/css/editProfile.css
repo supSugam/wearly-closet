@@ -1,0 +1,180 @@
+
+.container-editProfile,
+.container-forgotPassword {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 75rem;
+    margin: 0 auto;
+    background: url(../images/edit-form-bg.svg) no-repeat center center/cover;
+}
+.form-section {
+    background-color: #f8fafc;
+    border-radius: 3rem;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.175);
+    z-index: 3;
+}
+.editProfile-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 130rem;
+    padding: 3rem;
+    min-height: 57rem;
+    gap: 4rem;
+}
+
+.editPassword-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 130rem;
+    padding: 3rem;
+    min-height: 60rem;
+    gap: 4rem;
+}
+
+.name-section {
+    display: flex;
+    justify-self: flex-end;
+    align-items: center;
+    gap: 3rem;
+}
+
+.editProfile-form {
+    max-height: 40rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    grid-template-rows: 2fr 1fr 1fr 1fr;
+}
+.editPassword-form {
+    max-height: 30rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.name-fields__edit {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.avatar-upload__edit {
+    transform: translate(0rem, 0rem) !important;
+}
+
+.input-field__edit::placeholder {
+    color: #999;
+}
+
+.input-field__edit {
+    width: 100%;
+    padding: 1.6rem 1.6rem 1.6rem 4.6rem;
+    font-size: 1.7rem;
+    font-family: inherit;
+    color: inherit;
+    border: none;
+    background-color: #f9fafb;
+    border-radius: 0.6rem;
+    margin-bottom: 8px;
+    border: 1px solid #00000020;
+    box-shadow: 0 1px 7px rgb(0 0 0 / 31%);
+}
+
+.input-field__edit:focus,
+.input-field__edit:active {
+    outline: none;
+    border: 1px solid #80bfff;
+    box-shadow: 0 1px 2px rgba(8, 220, 240, 0.714);
+}
+
+.input-field__edit-icon {
+    color: #64748b;
+    position: absolute;
+    top: 31%;
+    left: 5%;
+    font-size: 1.8rem;
+}
+
+.credentials-fields__edit {
+    display: grid;
+    width: 100%;
+}
+
+.btn-saveChanges {
+    border-radius: 6px;
+    font-size: 2.4rem;
+}
+
+.error-message__edit {
+    position: absolute;
+    top: -2rem;
+    display: block;
+    opacity: 0;
+    color: rgba(255, 0, 0, 0.505);
+    font-size: 1.4rem;
+}
+
+.error-message__edit.show {
+    opacity: 1;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.edit-password-container{
+    margin-top: 3rem;
+    gap: 3rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+.input-field__edit-container {
+    position: relative;
+    transition: all 0.4s ease-in;
+}
+
+.email-field .input-field__edit-icon,
+.phone-field .input-field__edit-icon {
+    left: 4%;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-field__edit-icon.currentPass-icon{
+    top: 23% !important;
+}
+
+.input-field__edit-icon.edit-pass{
+    left: 4% !important;
+}
+
+.toggle-password-view__edit {
+    position: absolute;
+    top: 28%;
+    right: 4%;
+    font-size: 2rem;
+    color: #64748b;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.currentPass-eye{
+    top: 23% !important;
+}
