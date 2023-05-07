@@ -1,0 +1,77 @@
+
+.container__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 72rem;
+    background: url("../images/blur-bg-error.svg") no-repeat center center/cover;
+    max-width: 135rem;
+    padding: 0 0;
+    margin: 3.2rem auto;
+}
+.error_contents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.error_image {
+    position: relative;
+    width: 50%;
+    height: 100%;
+}
+.error_image--img {
+    position: absolute;
+    top: 3%;
+    left: 13%;
+    width: 86%;
+    transition: all 0.3s ease-in-out;
+}
+
+.error_text--img{
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    top: -6%;
+    left: 24%;
+    transform: scale(0.8) rotate(-20deg);
+
+}
+.error_image--img:hover,
+.error_text--img:hover{
+    transform: scale(1.08) rotate(10deg);
+}
+
+.error_text {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6rem 0 0;
+    position: relative;
+}
+
+.error_text--heading {
+    font-size: 15rem;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    text-align: center;
+    font-family: "Baloo";
+    margin-top: 2.4rem;
+}
+
+.error_text--para{
+    font-size: 2.4rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0 0 0 2rem;
+    margin-bottom: 3rem;
+}
+
+.error_contents .back-to-shopping{
+
+}
