@@ -97,15 +97,19 @@ public class UserRegistrationServlet extends HttpServlet {
         if(imageUploaded) {
             // Create a User object
             User user = new User(firstName, lastName, phoneNumber, email, password, imageName);
-            SessionManager.createSession(request.getSession(), user.getUser_id(), user.getFirst_name(),user.getUser_type());
-
+            user.setUser_type("customer");
             // Save the user to the database
-            userDAO.saveUser(user);
+            User userData = userDAO.saveUser(user);
 
+            if(userData!=null) {
+                SessionManager.createSession(request.getSession(), userData.getUser_id(), userData.getFirst_name(),userData.getUser_type());
+            } else{
+                response.setStatus(400);
+                response.getWriter().println("User not registered");
+                return;
+            }
 
-            SessionManager.createSession(request.getSession(), user.getUser_id(), user.getFirst_name(),user.getUser_type());
-
-            RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/view/index.jsp");
             rd.forward(request, response);
             response.setStatus(200);
 

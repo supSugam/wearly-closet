@@ -28,7 +28,7 @@ public class CartDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 int cartId = rs.getInt("cart_id");
-                Timestamp dateCreated = rs.getTimestamp("date_created");
+                Date dateCreated = rs.getDate("date_created");
                 cart = new Cart(userId, cartId, dateCreated);
             } else {
                 ps = this.conn.prepareStatement("INSERT into cart(user_id) values(?)", Statement.RETURN_GENERATED_KEYS);
@@ -37,23 +37,12 @@ public class CartDAO {
                 rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     int cartId = rs.getInt(1);
-                    Timestamp dateCreated = rs.getTimestamp("date_created");
+                    Date dateCreated = new Date(System.currentTimeMillis());
                     cart = new Cart(userId, cartId, dateCreated);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
         }
         return cart;
     }

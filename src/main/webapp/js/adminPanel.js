@@ -49,6 +49,14 @@ adminMenuItems.forEach((item) => {
         }
 
     });
+    adminPanelContents.forEach((panel) => {
+
+            if(panel.classList.contains("add-product-form")){
+                panel.classList.remove("hidden");
+                loader.classList.add("hidden");
+            }
+
+    });
 
     item.addEventListener("click", (e) => {
         adminPanelContents.forEach((panel) => {
@@ -69,7 +77,7 @@ adminMenuItems.forEach((item) => {
             setTimeout(function () {
                 loader.classList.add("hidden");
                 document
-                    .querySelector(".table-container.table__customer-orders")
+                    .querySelector(".table__customer-list")
                     .classList.remove("hidden");
             }, 1000); // Remove class after 3 seconds
         }
@@ -117,6 +125,116 @@ productSearchInput.addEventListener("keypress", (e) => {
     }
 });
 
+// Customer Section
+
+const customerListContainer = document.querySelector(".table__customer-list");
+
+const customerSearchForm = customerListContainer.querySelector(".search__form-customer");
+const searchFeedbackUser = document.querySelector(".search-feedback__text");
+
+const userResultsContainer = customerListContainer.querySelector(".user-results-container");
+
+
+customerSearchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let searchQuery = customerSearchInput.value;
+    if(searchQuery==="") searchQuery="all";
+    searchCustomer(searchQuery);
+});
+
+const customerSearchInput = customerSearchForm.querySelector("input");
+customerSearchInput.addEventListener("keydown", (e) => {
+    if(e.key==="Enter"){
+        let searchQuery = customerSearchInput.value;
+        if(searchQuery==="") searchQuery="all";
+        searchCustomer(searchQuery);
+    }
+})
+
+const searchCustomer = (searchQuery) => {
+    customerListContainer.querySelector(".table-wrapper").style.opacity = "0.6";
+    async function getCustomers() {
+        const response = await fetch(`http://localhost:8080/wearly-ecommerce/SearchCustomersServlet?searchQuery=${searchQuery}`, {
+            method: 'get'
+        });
+        const data = await response.json();
+        return data;
+    }
+
+    const generateUserMarkup = (user) => {
+        const markup = `
+                                  <tr>
+                                    <td class="image-column">
+                                        <img src="../images/user-images/${user.image_name}" alt="Product Image" />
+                                    </td>
+                                    <td>${user.user_id}</td>
+                                    <td>${user.first_name}</td>
+                                    <td>${user.last_name}</td>
+                                    <td>${user.phone_number}</td>
+                                    <td>${user.registered_date}</td>
+                                    <td>
+                                        <button onclick="viewCustomerOrders(${user.user_id})" class="btn btn-action__customer btn--viewOrders">View Orders</button>
+                                    </td>
+                                </tr>
+        `
+        userResultsContainer.insertAdjacentHTML("beforeend", markup);
+    };
+
+    function displayCustomers() {
+
+        return getCustomers().then(responseData => {
+
+            const searchResultsCount = responseData.length;
+
+            console.log(responseData, searchResultsCount);
+
+            if (searchResultsCount === 0) {
+                searchFeedbackUser.classList.add("showMessage");
+                customerListContainer.querySelector(".table-wrapper").style.opacity = "1";
+                userResultsContainer.innerHTML = "";
+            }
+
+            if(searchResultsCount>0){
+                userResultsContainer.innerHTML = "";
+                responseData.forEach(user => {
+                    generateUserMarkup(user);
+                });
+                customerListContainer.querySelector(".table-wrapper").style.opacity = "1";
+            }
+        });
+    }
+
+    setTimeout(function () {displayCustomers()}, 1000);
+};
+
+
+const viewCustomerOrders = (userId) => {
+    userId = userId.toString();
+    window.location.href = `http://localhost:8080/wearly-ecommerce/view/orders.jsp?userId=${userId}`;
+};
+
+
+//------------------------------------------------//
+
+
+document.querySelectorAll(".btn--deleteProduct").forEach((btn) => {
+
+    btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const productId = e.target.dataset.id;
+        const productRow = e.target.closest("tr");
+        fetch(`http://localhost:8080/wearly-ecommerce/DeleteProductServlet?productId=${productId}`, {
+            method: "get",
+        }).then((response) => {
+            if(response.status===200){
+                productRow.remove();
+            } else{
+                console.log("Response not OK");
+            }
+        });
+    })
+});
+//------------------------------------------------//
 
 let editProductForm = document.querySelector(".edit-product-form");
 let editNameInput = document.getElementById("product-name__edit");

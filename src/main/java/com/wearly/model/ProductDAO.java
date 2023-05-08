@@ -107,8 +107,6 @@ public class ProductDAO {
     }
 
 
-
-
     public Product getProductInfoById(int productId) {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -150,7 +148,7 @@ public class ProductDAO {
         return product;
     }
 
-    public boolean updateProductInfo(int productId, String productName, String productBrand, int productPrice,int productQuantity, int categoryId,String descriptionString,String imageName) throws SQLException {
+    public boolean updateProductInfo(int productId, String productName, String productBrand, int productPrice, int productQuantity, int categoryId, String descriptionString, String imageName) throws SQLException {
         String sql = "UPDATE product SET product_name=?, brand=?, price=?,stock_quantity=?, category_id=?, description=?, image_name=? WHERE product_id=?";
         try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
             ps.setString(1, productName);
@@ -190,13 +188,22 @@ public class ProductDAO {
                 quantity = rs.getInt("stock_quantity");
             }
 
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             // Close the database resources
-            try { if (rs != null) rs.close(); } catch (SQLException e) { }
-            try { if (ps != null) ps.close(); } catch (SQLException e) { }
-            try { if (conn != null) conn.close(); } catch (SQLException e) { }
+            try {
+                if (rs != null) rs.close();
+            } catch (SQLException e) {
+            }
+            try {
+                if (ps != null) ps.close();
+            } catch (SQLException e) {
+            }
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+            }
         }
         return quantity;
     }
@@ -219,6 +226,7 @@ public class ProductDAO {
 
         return price;
     }
+
     public boolean decreaseProductStock(int productId, int decreaseBy) throws SQLException {
         try (PreparedStatement ps = conn.prepareStatement("UPDATE product SET stock_quantity = stock_quantity - ? WHERE product_id = ?")) {
             ps.setInt(1, decreaseBy);
@@ -230,7 +238,6 @@ public class ProductDAO {
             throw e;
         }
     }
-
 
 
     public List<String> getMatchingSuggestions(String searchTerm) {
@@ -260,7 +267,6 @@ public class ProductDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
 
         return matchingTerms;
@@ -311,6 +317,19 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return productList;
+    }
+
+    public boolean deleteProductById(int productId) {
+        String sql = "DELETE FROM product WHERE product_id = ?";
+        try (PreparedStatement ps = this.conn.prepareStatement(sql)) {
+            ps.setInt(1, productId);
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
 

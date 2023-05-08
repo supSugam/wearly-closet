@@ -32,11 +32,7 @@ public class EditProfileServlet extends HttpServlet {
         int userId = SessionManager.getUserId(request.getSession());
         System.out.println(userId);
         UserDAO userDAO = new UserDAO();
-        if (userDAO.userAlreadyExists(phoneNumber)) {
-            response.setStatus(400);
-            response.getWriter().println("User already exists");
-            return;
-        }
+
         boolean userDetailsUpdated = false;
 
         if (imageChanged){

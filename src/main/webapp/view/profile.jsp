@@ -11,9 +11,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+        try {
     if(SessionManager.isLoggedIn(request.getSession())) {
         User user = new UserDAO().getUserDetailsByUserId(SessionManager.getUserId(request.getSession()));
         request.setAttribute("user", user);
+    }
+        } catch (Exception e) {
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
 %>
 <html>

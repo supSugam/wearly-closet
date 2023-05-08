@@ -1,6 +1,7 @@
 package com.wearly.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class User implements Serializable {
 
@@ -14,6 +15,7 @@ public class User implements Serializable {
         private String password;
         private String image_name;
         private String user_type;
+        private Date registered_date;
 
         public User() {
 
@@ -94,5 +96,12 @@ public class User implements Serializable {
         public void setImage_name(String image_name) {
                 this.image_name = image_name;
         }
-// Constructors, getters and setters
+
+        public Date getRegistered_date() {
+                return registered_date;
+        }
+        public void setRegistered_date(Date registered_date) {
+                this.registered_date = registered_date;
+        }
+
 }

@@ -40,6 +40,8 @@ public class AddToCartServlet extends HttpServlet {
         int userId = SessionManager.getUserId(request.getSession());
         CartDAO cartDao = new CartDAO();
 
+
+
         Cart cart = cartDao.getCartByUserId(userId);
 
         // Check if the product is already in the cart

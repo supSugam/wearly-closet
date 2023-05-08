@@ -400,11 +400,17 @@ SHOW AND HIDE PRODUCT FORM
 
 .image-column img {
     object-fit: cover;
-    width: 10rem;
-    height: 10rem;
-    top: 8%;
-    left: 5rem;
+    width: 4rem;
+    height: 4rem;
+    top: 11px;
+    left: 3rem;
     position: absolute;
+    border-radius: 2rem;
+}
+
+.table-container .image-column img{
+    width: 11rem;
+    height: 10rem;
 }
 .btn-action {
     background: #4b5563;
@@ -419,3 +425,138 @@ SHOW AND HIDE PRODUCT FORM
 /*
 Input Tags
 */
+
+.search-feedback__text{
+    color: brown;
+    opacity: 0;
+    transition: all 0.3s ease-in;
+
+}
+.search-feedback__text.showMessage{
+    opacity: 1;
+}
+
+
+/* Table Customer*/
+
+ .table-wrapper {
+     width: 100%;
+     height: 40rem;
+     min-height: 40rem;
+     max-height: 40rem;
+     border: 2px solid #ccc;
+     border-radius: 5px;
+     overflow-y: scroll;
+ }
+
+.table-wrapper table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-wrapper thead th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table-wrapper tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-wrapper tbody td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.table-wrapper th {
+    text-align: left;
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.table-wrapper td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table-wrapper tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table-wrapper tbody tr:hover {
+    background-color: #ddd;
+}
+
+.table-wrapper thead th:first-child,
+.table-wrapper tbody td:first-child {
+    width: 100px;
+}
+
+.table-wrapper thead th:nth-child(2),
+.table-wrapper tbody td:nth-child(2) {
+    width: 100px;
+}
+
+.table-wrapper thead th:nth-child(3),
+.table-wrapper tbody td:nth-child(3),
+.table-wrapper thead th:nth-child(4),
+.table-wrapper tbody td:nth-child(4) {
+    width: 150px;
+}
+
+.table-wrapper thead th:nth-child(5),
+.table-wrapper tbody td:nth-child(5) {
+    width: 120px;
+}
+
+.table-wrapper thead th:nth-child(6),
+.table-wrapper tbody td:nth-child(6) {
+    width: 120px;
+}
+
+.table-wrapper thead th:last-child,
+.table-wrapper tbody td:last-child {
+    width: 150px;
+    text-align: center;
+}
+
+.grey-gradient {
+    background: linear-gradient(to bottom, #f2f2f2, #ccc);
+}
+
+
+.search__form-customer{
+    position: relative;
+}
+
+.table__customer-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+    height: 60rem;
+}
+
+.search__form-customer .fa-magnifying-glass{
+    top: 52%;
+    right: 5%;
+}
+
+.btn-action__customer {
+    background: #4b5563;
+    color: #fff;
+    border: none;
+    padding: 1rem 1rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+}

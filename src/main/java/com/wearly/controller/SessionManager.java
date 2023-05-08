@@ -20,14 +20,19 @@ public class SessionManager {
         session.setAttribute(LOGGED_IN, true);
         session.setAttribute(USER_TYPE, userType);
         session.setAttribute(USER_NAME, userName);
+//        Cart cart = new CartDAO().getCartByUserId(userId);
+//        session.setAttribute(CART_ID, cart.getCart_id());
+
+    }
+
+    public static void createCartSession(HttpSession session, int userId){
         Cart cart = new CartDAO().getCartByUserId(userId);
         session.setAttribute(CART_ID, cart.getCart_id());
-
     }
 
-    public static void createCartSession(HttpSession session, int cartId) {
-        session.setAttribute(CART_ID, cartId);
-    }
+//    public static void createCartSession(HttpSession session, int cartId) {
+//        session.setAttribute(CART_ID, cartId);
+//    }
 
     public static boolean isLoggedIn(HttpSession session) {
         return (session.getAttribute(LOGGED_IN) != null && (Boolean) session.getAttribute(LOGGED_IN));

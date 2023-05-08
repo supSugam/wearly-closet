@@ -33,6 +33,8 @@ public class LoginServlet extends HttpServlet {
         // Extract data from the request body
         String email = requestBody.get("email").getAsString();
         String password = requestBody.get("password").getAsString();
+
+        // incase user wants to remember password (cookie thing, not implemented yet)
         boolean rememberPassword = requestBody.get("rememberPassword").getAsBoolean();
 
         System.out.println("am i executed? 111");
@@ -40,9 +42,11 @@ public class LoginServlet extends HttpServlet {
         UserDAO userDao = new UserDAO();
         User user = userDao.getUserByEmail(email);
 
+        // If email does not exist, return error
         if (user == null) {
 
             System.out.println("User does not exist");
+            response.setStatus(400);
             return;
         }
 
@@ -52,12 +56,14 @@ public class LoginServlet extends HttpServlet {
             if(!passwordHandler.verifyPassword(password, user.getPassword())) {
                 System.out.println("Password is incorrect");
                 response.setStatus(400);
-                return;
             } else{
                 // If password is correct, create a session
                 System.out.println("am i executed?");
                 System.out.println(user.getUser_type());
                 SessionManager.createSession(request.getSession(), user.getUser_id(), user.getFirst_name(),user.getUser_type());
+                if(user.getUser_type().equals("customer")){
+                SessionManager.createCartSession(request.getSession(), user.getUser_id());
+                }
 
                 RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
                 rd.forward(request, response);

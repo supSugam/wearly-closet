@@ -12,16 +12,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
+    try {
     int productId = Integer.parseInt(request.getParameter("id"));
-    System.out.println("Product id: " + productId);
     Product product = new ProductDAO().getProductInfoById(productId);
 
 
     if(product != null){
         request.setAttribute("product", product);
     } else{
-        request.setAttribute("message", "Product not found");
-        request.getRequestDispatcher("error.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
+    }
+        } catch (Exception e) {
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
 //    // Get the product object from the request
 //    Product product = (Product) request.getAttribute("product");

@@ -8,9 +8,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%
+    try {
     if(SessionManager.isAlreadyLoggedIn(request)) {
         response.sendRedirect(request.getContextPath()+ "/view/index.jsp");
         return;
+    }
+        } catch (Exception e) {
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
 %>
 

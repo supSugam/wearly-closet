@@ -7,17 +7,22 @@
   User: sugam
   Date: 5/2/2023
   Time: 3:55 PM
-  To change this template use File | Settings | File Templates.
+
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    try {
     if(SessionManager.isAlreadyLoggedIn(request)) {
 
-        if (!SessionManager.isCustomer(request.getSession())) {
-            response.sendRedirect(request.getContextPath()+ "/view/index.jsp");
-            return;
+        int userId = 0;
+
+        if (SessionManager.isAdmin(request.getSession())) {
+            userId = Integer.parseInt(request.getParameter("userId"));
         }
-        int userId = SessionManager.getUserId(request.getSession());
+
+        if(SessionManager.isCustomer(request.getSession())) {
+            userId = SessionManager.getUserId(request.getSession());
+        }
         OrderDAO orderDAO = new OrderDAO();
         List<Orders> ordersList = orderDAO.getOrdersByUserId(userId);
         boolean isOrderEmpty = ordersList.isEmpty();
@@ -25,16 +30,30 @@
         if(!isOrderEmpty) {
             request.setAttribute("ordersList", ordersList);
         }
+        String userFname = new UserDAO().getUserFirstNameById(userId);
+        if(userFname == null) {
+            response.sendRedirect(request.getContextPath() + "/view/error.jsp");
+            return;
+        }
+        request.setAttribute("userFname", userFname);
     } else {
-        response.sendRedirect(request.getContextPath() + "/view/index.jsp");
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
         return;
+    }
+    } catch (Exception e) {
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
 
 %>
 <html>
 <head>
-    <title>Your Cart</title>
     <c:import url="pageResources.jsp" />
+    <c:if test="${userBean.isAdmin}">
+        <title>Customer's Orders</title>
+    </c:if>
+    <c:if test="${userBean.isCustomer}">
+        <title>Your Orders</title>
+    </c:if>
 
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/styles.css" />
@@ -71,13 +90,18 @@
         <div class="cart-items">
             <div class="cart-heading">
                 <h1 class="cart-heading__title">
+                    <c:if test="${userBean.isAdmin}">
+                        <span class="gradient-text"><c:out value="${userFname}'s"></c:out></span> Orders
+                    </c:if>
+                    <c:if test="${userBean.isCustomer}">
                     Your <span class="gradient-text">Orders</span>
+                    </c:if>
                 </h1>
-                <p class="cart-items__subtitle"><span><c:out value="${ordersList.size()}"></c:out> </span> Items</p>
+                <p class="cart-items__subtitle"><span><c:out value="${ordersList.size()}"></c:out> </span> Orders</p>
             </div>
 
             <div class="orders-content">
-                <c:when test="${isOrderEmpty}">
+                <c:if test="${isOrderEmpty}">
                     <section class="empty-order-section">
                         <img src="../images/empty-cart.svg" alt="empty cart" class="empty-order-img">
                         <c:if test="${userBean.isAdmin}">
@@ -96,7 +120,7 @@
                         </a>
                         </c:if>
                     </section>
-                </c:when>
+                </c:if>
                 <div class="order-heading__container">
                     <h2 class="order-attribute__heading">Order ID</h2>
                     <h2 class="order-attribute__heading">Product Detail</h2>
@@ -139,13 +163,13 @@
                                     </div>
                                 </div>
                                 <div class="order-item__quantity">
-                                    <h2>${order.totalPrice}</h2>
+                                    <h2>${orderedItem.quantity}</h2>
                                     <span class="stock-quantity">(${product.stock_quantity} Left in Stock.)</span>
                                 </div>
 
                                 <div class="order-item__price">
                                     <p class="order-item__price--text">Rs.</p>
-                                    <span class="order-item__price--value">15</span>
+                                    <span class="order-item__price--value">${order.totalPrice}</span>
                                 </div>
                                 <div class="order-item__billing-address">
                                     <p class="order-item__billing-address">${order.billingAddress}</p>

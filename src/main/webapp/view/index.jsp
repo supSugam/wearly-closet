@@ -2,6 +2,7 @@
 <%@ page import="com.wearly.model.Product" %>
 <%@ page import="com.wearly.model.ProductDAO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.wearly.model.UserDAO" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -15,8 +16,12 @@
 
 
 <%
+    try {
     List<Product> productList = new ProductDAO().getAllProductsDetails(8);
     request.setAttribute("productList", productList);
+        } catch (Exception e) {
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
+    }
 %>
 
 
@@ -60,9 +65,20 @@
         <div class="hero">
             <div class="hero-text-box">
                 <h1 class="heading-primary">
+                    <c:if test="${userBean.isLoggedIn}">
+                            <%
+                                UserDAO userDAO = new UserDAO();
+                                String firstName = userDAO.getUserFirstNameById(SessionManager.getUserId(request.getSession()));
+                                request.setAttribute("firstName", firstName);
+                            %>
+                            <span class="extra-bold">Hello 👋</span><br>
+                            <span class="gradient-text">${firstName}</span><br>
+                    </c:if>
+                <c:if test="${!userBean.isLoggedIn}">
                     <span class="extra-bold">Quality </span>
                     <span class="gradient-text">is</span><br />
                     Priority
+                </c:if>
                 </h1>
                 <p class="description-text-hero">
                     Get ready to elevate your wardrobe with Wearly. Our premium

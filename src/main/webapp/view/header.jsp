@@ -68,9 +68,14 @@
             </form>
             <ul class="dropdown-menu-searchsuggestions">
                 <p><i class="fa-solid fa-fire"></i> Popular Right Now</p>
-                <li class="dropdown-option" data-value="hoodie">
-                    <i class="fa-light fa-magnifying-glass"></i>Hoodie
-                </li>
+                <a href="products.jsp?searchQuery=hoodie">
+                    <li class="dropdown-option">
+                        <i class="fa-light fa-magnifying-glass"></i>Hoodie
+                    </li>
+                </a>
+<%--                <li class="dropdown-option" data-value="hoodie">--%>
+<%--                    <i class="fa-light fa-magnifying-glass"></i>Hoodie--%>
+<%--                </li>--%>
                 <li class="dropdown-option" data-value="tshirt">
                     <i class="fa-light fa-magnifying-glass"></i>Tshirt
                 </li>
@@ -100,7 +105,7 @@
                         </a>
                     </c:if>
                     <ul class="dropdown-menu-profile">
-                        <a href="/profile">
+                        <a href="profile.jsp">
                             <li class="dropdown-option">
                                 <i class="fa-solid fa-user"></i> Profile
                             </li>

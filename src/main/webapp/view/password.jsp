@@ -11,8 +11,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    try {
     if(!SessionManager.isLoggedIn(request.getSession())) {
         response.sendRedirect(request.getContextPath()+ "/view/index.jsp");
+    }
+        } catch (Exception e) {
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
 %>
 <html>

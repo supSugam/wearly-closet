@@ -27,7 +27,6 @@ const removeError = function (inputField) {
 const projectPath = "http://localhost:8080/wearly-ecommerce";
 
 const validateLoginForm = function () {
-    console.log("validateLoginForm")
 
     const loginForm = document.querySelector(".login-form");
     const inputFields = loginForm.querySelectorAll(
@@ -37,6 +36,7 @@ const validateLoginForm = function () {
 
     const btnLogin = loginForm.querySelector(".btn-login");
     btnLogin.disabled = true;
+    btnLogin.classList.add("disabled");
 
     const checkBoxInput = loginForm.querySelector('input[type="checkbox"]');
 
@@ -55,6 +55,7 @@ const validateLoginForm = function () {
 
     if (!isValid) {
         btnLogin.disabled = false;
+        btnLogin.classList.remove("disabled");
         return false;
     }
     btnLogin.innerHTML = 'Logging In <i class="fa-duotone fa-spinner-third fa-spin"></i>';
@@ -82,14 +83,16 @@ const validateLoginForm = function () {
             window.location.href = `${projectPath}/view/index.jsp`;
         } else {
             // If login fails, display an error message to the user
-            console.log('Login failed');
+            btnLogin.disabled = false;
+            btnLogin.innerHTML = 'Login';
+            btnLogin.classList.remove("disabled");
+            showError(inputFields[0], "Invalid email or password!")
         }
     })
         .catch(error => {
             console.error('Error:', error);
+            window.location.href = `${projectPath}/view/error.jsp`;
         });
-
-
 
     // submit form if validation is successful
     return true;
@@ -111,6 +114,7 @@ const validateSignupForm = function () {
 
     const btnSignup = signupForm.querySelector(".btn-signup");
     btnSignup.disabled = true;
+    btnSignup.classList.add("disabled");
 
     let isValid = true;
 
@@ -215,11 +219,15 @@ const validateSignupForm = function () {
                 window.location.href = `${projectPath}/view/index.jsp`;
             } else {
                 // If login fails, display an error message to the user
-                console.log('Login failed');
+                showError(document.querySelector(".email-field"), "Email already exists!")
+                btnSignup.disabled = false;
+                btnSignup.innerHTML = 'Sign Up';
+                btnSignup.classList.remove("disabled");
             }
         })
             .catch(error => {
                 console.error('Error:', error);
+                window.location.href = `${projectPath}/view/error.jsp`;
             });
     return true;
     };
@@ -247,6 +255,7 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
 
     const btnSubmit = productForm.querySelector(".btn-primary"); //btn primaru
     btnSubmit.disabled = true;
+    btnSubmit.classList.add("disabled");
 
     let selectedGender = "";
     let selectedCategory = "";
@@ -358,6 +367,7 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
         console.log(inputChanged, imageChanged,isValid);
 
         btnSubmit.disabled = false;
+        btnSubmit.classList.remove("disabled");
         return false;
     }
     console.log(inputChanged, imageChanged,isValid);
@@ -451,13 +461,19 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
                     }
                     productForm.reset();
                     btnSubmit.disabled = false;
+                    btnSubmit.classList.remove("disabled");
                 } else {
                     // If login fails, display an error message to the user
-                    console.log("Adding product failed");
+                    btnSubmit.innerHTML = "Save Product";
+                    btnSubmit.disabled = false;
+                    btnSubmit.classList.remove("disabled");
+                    productForm.querySelector(".no-change-error").textContent = "Something went wrong!";
+                    productForm.querySelector(".no-change-error").classList.add("show");
+
                 }
             })
             .catch((error) => {
-                console.error("Error:", error);
+                window.location.href = `${projectPath}/error.jsp`;
             });
         return true;
     });

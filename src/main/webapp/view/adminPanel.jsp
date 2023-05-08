@@ -2,7 +2,9 @@
 <%@ page import="com.wearly.controller.SessionManager" %>
 <%@ page import="com.wearly.model.Product" %>
 <%@ page import="com.wearly.model.ProductDAO" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.wearly.model.UserDAO" %>
+<%@ page import="com.wearly.model.User" %><%--
   Created by IntelliJ IDEA.
   User: sugam
   Date: 4/18/2023
@@ -12,18 +14,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    if(SessionManager.isAlreadyLoggedIn(request)) {
+    try {
+        if (SessionManager.isAlreadyLoggedIn(request)) {
 
-        if (!SessionManager.isAdmin(request.getSession())) {
-            response.sendRedirect(request.getContextPath()+ "/view/index.jsp");
+            if (!SessionManager.isAdmin(request.getSession())) {
+                response.sendRedirect(request.getContextPath() + "/view/error.jsp");
+                return;
+            }
+        } else {
+            response.sendRedirect(request.getContextPath() + "/view/index.jsp");
             return;
         }
-    } else {
-        response.sendRedirect(request.getContextPath() + "/view/index.jsp");
-        return;
+        List<Product> productList = new ProductDAO().getProductsList();
+        request.setAttribute("productList", productList);
+        List<User> userList = new UserDAO().getAllUsersList();
+        request.setAttribute("userList", userList);
+    } catch (Exception e) {
+        // Handling any exception that might occur
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
-    List<Product> productList = new ProductDAO().getProductsList();
-    request.setAttribute("productList", productList);
 %>
 <html>
 <head>
@@ -954,39 +963,56 @@
                 </div>
 
                 <!-- Data in Tabular View -->
+                <div class="table__customer-list">
+                    <form action="" class="search__form-customer">
+                        <i
+                                class="fa-solid fa-magnifying-glass form-icon gradient-text active"
+                        ></i>
+                        <p class="search-feedback__text">No Results found.</p>
+                        <input
+                                class="search__form--input"
+                                name="search_term"
+                                type="text"
+                                placeholder="Search with Customer's Name"
+                                autocomplete="off"
+                        />
+                    </form>
+                    <div class="table-wrapper scroll-simple">
 
-                <div class="table-container table__customer-orders">
-                    <table class="customers-table">
-                        <thead class="grey-gradient">
-                        <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Order ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>01/01/2023</td>
-                            <td>123456789</td>
-                            <td>Product A</td>
-                            <td>$9.99</td>
-                            <td>1</td>
-                            <td>$9.99</td>
-                        </tr>
-                        <tr>
-                            <td>01/02/2023</td>
-                            <td>987654321</td>
-                            <td>Product B</td>
-                            <td>$19.99</td>
-                            <td>2</td>
-                            <td>$39.98</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <table>
+                            <thead class="grey-gradient">
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Phone No.</th>
+                                <th scope="col">Signup Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody class="user-results-container">
+                            <c:forEach var="user" items="${userList}">
+                                <tr>
+                                    <td class="image-column">
+                                        <img src="../images/user-images/${user.image_name}" alt="Product Image" />
+                                    </td>
+                                    <td>${user.user_id}</td>
+                                    <td>${user.first_name}</td>
+                                    <td>${user.last_name}</td>
+                                    <td>${user.phone_number}</td>
+                                    <td>${user.registered_date}</td>
+                                    <td>
+                                        <button onclick="viewCustomerOrders(${user.user_id})" class="btn btn-action__customer btn--viewOrders">View Orders</button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </section>

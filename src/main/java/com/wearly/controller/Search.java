@@ -23,7 +23,6 @@ public class Search extends HttpServlet {
 
         String query = request.getParameter("query");
 
-        System.out.println("query: " + query);
         List<String> matchingTerms = new ProductDAO().getMatchingSuggestions(query);
         for (String term : matchingTerms) {
             System.out.println(term);

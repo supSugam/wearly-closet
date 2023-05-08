@@ -43,7 +43,9 @@ const displayStarRating = function (value) {
 	}
 	return starsHtml;
 };
-
+const viewProductDetails = function (productId,productName) {
+	window.location.href = `http://localhost:8080/wearly-ecommerce/view/product.jsp?id=${productId}&name=${productName}`;
+}
 const productCardInit = function () {
 	cartQuantityHandler();
 	const productStarsGenerator = function (productContainer) {

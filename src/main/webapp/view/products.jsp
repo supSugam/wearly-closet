@@ -14,6 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
+    try {
     String searchQuery = request.getParameter("searchQuery");
     if(searchQuery == null){
         searchQuery = "";
@@ -25,6 +26,9 @@
         request.setAttribute("matchingProducts", matchingProducts);
         request.setAttribute("totalResults", matchingProducts.size());
 
+    }
+        } catch (Exception e) {
+        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
 %>
 <html>
@@ -355,7 +359,7 @@
                                     />
                                     <label class="label-checkmark" for="checkBox-adidas">
                                         <span class="checkmark"></span>
-                                        <p>Women</p>
+                                        <p>Adidas</p>
                                     </label>
                                 </li>
                                 <li class="category-option">
@@ -368,7 +372,7 @@
                                     />
                                     <label class="label-checkmark" for="checkBox-domestic">
                                         <span class="checkmark"></span>
-                                        <p>Domestic</p>
+                                        <p>Others</p>
                                     </label>
                                 </li>
                             </ul>

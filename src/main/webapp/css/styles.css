@@ -54,6 +54,11 @@ Section Header / Navigation Bar !!!
 	transition: all 0.3s;
 }
 
+.header__nav-link:hover{
+	color: #2c4eb2;
+	transform: scale(1.09);
+}
+
 /* Header Icons */
 
 .header__icons {

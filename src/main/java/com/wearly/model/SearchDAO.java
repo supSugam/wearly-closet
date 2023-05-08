@@ -34,6 +34,25 @@ public class SearchDAO {
         return matchingProducts;
     }
 
+    public List<User> searchUsers(String searchTerm) {
+        List<User> matchingUsers = new ArrayList<>();
+        searchTerm = searchTerm.toLowerCase();
+        // Retrieving the products are stored in a database or some other data store
+        List<User> allUsers = new UserDAO().getAllUsersList();
+
+        for (User user : allUsers) {
+            if(searchTerm.equals(("all"))){
+                matchingUsers.add(user);
+            }
+            if (user.getFirst_name().toLowerCase().contains(searchTerm) || user.getLast_name().toLowerCase().contains(searchTerm)) {
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
+    }
+
+
+
 
 //    public List<String> getMatchingProducts(String searchTerm) {
 //        List<String> matchingTerms = new ArrayList<>();
