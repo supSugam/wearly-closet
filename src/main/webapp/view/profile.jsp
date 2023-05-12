@@ -37,6 +37,7 @@
     <script defer src="../js/popupHandler.js"></script>
     <script defer src="../js/searchForm.js"></script>
     <script defer src="../js/editUserProfile.js"></script>
+    <script defer src="../js/searchForm.js"></script>
     <c:if test="${!userBean.isAdmin}">
         <script defer src="../js/product-card-view.js"></script>
     </c:if>

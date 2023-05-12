@@ -72,6 +72,7 @@
     <script defer src="../js/popupHandler.js"></script>
     <script defer src="../js/effects.js"></script>
     <script defer src="../js/viewProductDetails.js"></script>
+    <script defer src="../js/searchForm.js"></script>
 <%--    <script defer src="../js/cartPage.js"></script>--%>
 <%--    <script defer src="../js/orderProducts.js"></script>--%>
 

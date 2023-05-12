@@ -241,6 +241,7 @@
 	width: 50%;
 }
 
+
 /* .user-info-fields {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -465,3 +466,8 @@ Form Validation
 	color: #4b5563;
 	cursor: pointer;
 }
+
+.fa-key-login{
+	left: 5% !important;
+}
+

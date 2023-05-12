@@ -52,7 +52,8 @@
     <c:if test="${userBean.isLoggedIn}">
         <script defer src="../js/profileDropdown.js"></script>
         <c:if test="${userBean.isAdmin}">
-        <script defer src="../js/adminPanel.js"></script>
+<%--        <script defer src="../js/adminPanel.js"></script>--%>
+        <script defer src="../js/productActionsAdmin.js"></script>
         </c:if>
     </c:if>
 </head>
@@ -164,9 +165,11 @@
                         <span class="gradient-text">25%</span> Off
                     </h1>
                     <h3 class="heading-tertiary">Premium Jeans</h3>
+                    <a href="product.jsp">
                     <button class="btn btn-featured">
                         Buy Now <i class="ph ph-arrow-elbow-right"></i>
                     </button>
+                    </a>
                 </div>
             </div>
 
@@ -176,9 +179,11 @@
                         <span class="gradient-text">32%</span> Off
                     </h1>
                     <h3 class="heading-tertiary">Full White sportwear</h3>
+                    <a href="product.jsp">
                     <button class="btn btn-featured">
                         Buy Now <i class="ph ph-arrow-elbow-right"></i>
                     </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -190,7 +195,15 @@
         </button>
         <div class="popup-box">
             <div class="popup-content">
-                <h2 class="popup-heading">Login to Continue<br />🙂</h2>
+                <div class="header__logo-box">
+                    <img
+                            src="../images/animated-logo.gif"
+                            alt="wearly-logo"
+                            class="header__logo"
+                    />
+                    <a href="index.jsp"><h1 class="header__heading">wearly</h1></a>
+                </div>
+                <h2 class="popup-heading">Login to Continue 🙂</h2>
                 <div class="form-container">
                     <form
                             class="login-form"
@@ -311,7 +324,7 @@
                     <div class="add-to-cart">
                         <c:choose>
                             <c:when test="${userBean.isLoggedIn && userBean.isAdmin}">
-                                <button data-id="${product.product_id}" class="btn btn-action btn--editProduct">Edit</button>
+<%--                                <button data-id="${product.product_id}" class="btn btn-action btn--editProduct">Edit</button>--%>
                                 <button data-id="${product.product_id}" class="btn btn-action btn--deleteProduct">Delete</button>
                             </c:when>
                             <c:otherwise>
@@ -341,6 +354,25 @@
         </div>
     </section>
 </main>
+
+<dialog class="modal-popup" id="deleteProduct-modal">
+    <div class="popup-box">
+        <div class="popup-content">
+            <img src="../images/delete-product.svg" class="popup-image">
+
+            <div class="modal__text">
+                <h2>Are you sure? 😕</h2>
+                <p>
+                    Deleted products cannot be recovered. Are you sure you want to delete this product?
+                </p>
+            </div>
+            <div class="modal__buttons">
+                <button class="btn btn--modal btn--cancel" type="button">Cancel</button>
+                <button class="btn btn--modal btn--confirm" type="button">Delete</button>
+            </div>
+        </div>
+    </div>
+</dialog>
 
 <footer class="footer">
     <div class="foot-container grid--footer">

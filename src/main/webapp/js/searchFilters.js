@@ -212,6 +212,9 @@ const fetchSearchResults = function(searchFilters) {
             }
 
             if(searchResultsCount!==0){
+                if(!document.querySelector(".no-results-image").classList.contains("hidden")){
+                    document.querySelector(".no-results-image").classList.add("hidden");
+                }
                 products.forEach((product) => {
                     generateResultsMarkup(product,isAdmin);
                 });

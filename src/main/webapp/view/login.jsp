@@ -81,7 +81,11 @@
 
                 <div class="password-field input-field-container">
                     <span class="error-message">This field cannot be empty</span>
-                    <i class="fa-solid fa-key input-field-icon login-pass"></i>
+                    <i class="fa-solid fa-key input-field-icon fa-key-login"></i>
+                    <div class="toggle-password-view">
+                        <i class="ph-fill ph-eye"></i>
+                        <i class="ph-fill ph-eye-slash hidden"></i>
+                    </div>
                     <input
                             type="password"
                             name="password"

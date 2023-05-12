@@ -58,12 +58,15 @@
     <c:if test="${userBean.isLoggedIn}">
         <script defer src="../js/profileDropdown.js"></script>
         <c:if test="${userBean.isAdmin}">
-            <script defer src="../js/adminPanel.js"></script>
+<%--            <script defer src="../js/adminPanel.js"></script>--%>
+            <script defer src="../js/productActionsAdmin.js"></script>
+<%--            <script defer src="../js/product-card-view.js"></script>--%>
         </c:if>
     </c:if>
 </head>
 <body>
 <c:import url="header.jsp" />
+
 <div id="overlay"></div>
 <dialog class="modal-popup" id="login-modal">
     <button class="btn btn--close" type="button">
@@ -71,7 +74,15 @@
     </button>
     <div class="popup-box">
         <div class="popup-content">
-            <h2 class="popup-heading">Login to Continue<br />🙂</h2>
+            <div class="header__logo-box">
+                <img
+                        src="../images/animated-logo.gif"
+                        alt="wearly-logo"
+                        class="header__logo"
+                />
+                <a href="index.jsp"><h1 class="header__heading">wearly</h1></a>
+            </div>
+            <h2 class="popup-heading">Login to Continue 🙂</h2>
             <div class="form-container">
                 <form
                         class="login-form"
@@ -139,14 +150,32 @@
         </div>
     </div>
 </dialog>
+<dialog class="modal-popup" id="deleteProduct-modal">
+    <div class="popup-box">
+        <div class="popup-content">
+            <img src="../images/delete-product.svg" class="popup-image">
+
+            <div class="modal__text">
+                <h2>Are you sure? 😕</h2>
+                <p>
+                    Deleted products cannot be recovered. Are you sure you want to delete this product?
+                </p>
+            </div>
+            <div class="modal__buttons">
+                <button class="btn btn--modal btn--cancel" type="button">Cancel</button>
+                <button class="btn btn--modal btn--confirm" type="button">Delete</button>
+            </div>
+        </div>
+    </div>
+</dialog>
 
 <main class="container section-search">
     <section class="section-related">
         <span class="small-heading">Related Categories</span>
         <div class="search-related-category">
-            <div class="btn category-button">
+            <a href="http://localhost:8080/wearly-ecommerce/view/products.jsp?searchQuery=men" class="btn category-button">
                 <span class="description-text">Men</span>
-            </div>
+            </a>
             <div class="btn category-button">
                 <span class="description-text">Women</span>
             </div>
@@ -177,9 +206,12 @@
                 <div class="search-filter-header">
                     <i class="ph-fill ph-faders search-page-icons"></i>
                     <h1 class="search-heading-text">Filters</h1>
+                    <a href="http://localhost:8080/wearly-ecommerce/view/products.jsp">
+
                     <button class="btn btn-search-reset">
                         <i class="fa-solid fa-rotate-left search-page-icons"></i>
                     </button>
+                    </a>
                 </div>
             </div>
 
@@ -623,7 +655,7 @@
                             <div class="add-to-cart">
                                 <c:choose>
                                     <c:when test="${userBean.isLoggedIn && userBean.isAdmin}">
-                                        <button data-id="${product.product_id}" class="btn btn-action btn--editProduct">Edit</button>
+<%--                                        <button data-id="${product.product_id}" class="btn btn-action btn--editProduct">Edit</button>--%>
                                         <button data-id="${product.product_id}" class="btn btn-action btn--deleteProduct">Delete</button>
                                     </c:when>
                                     <c:otherwise>

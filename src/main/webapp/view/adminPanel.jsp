@@ -49,10 +49,12 @@
     <script defer src="../js/imageView.js"></script>
     <script defer src="../js/popupHandler.js"></script>
     <script defer src="../js/formController.js"></script>
+    <script defer src="../js/productActionsAdmin.js"></script>
     <script defer src="../js/adminPanel.js"></script>
-
+    <script defer src="../js/searchForm.js"></script>
     <script defer src="../js/productCheckBoxValidator.js"></script>
     <script defer src="../js/textArea.js"></script>
+    <script defer src="../js/profileDropdown.js"></script>
 </head>
 <body>
 <c:import url="header.jsp" />
@@ -69,7 +71,7 @@
                     😶‍🌫️
                 </p>
             </div>
-            <button class="btn btn--modal" type="button">OK</button>
+            <a href="adminPanel.jsp"><button class="btn btn--modal" type="button">OK</button></a>
         </div>
     </div>
 </dialog>

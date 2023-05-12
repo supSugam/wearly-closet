@@ -6,16 +6,16 @@
                 alt="wearly-logo"
                 class="header__logo"
         />
-        <h1 class="header__heading">wearly</h1>
+        <a href="index.jsp"><h1 class="header__heading">wearly</h1></a>
     </div>
 
     <nav class="header__nav">
         <ul class="header__nav-list">
             <li class="header__nav-item underline-effect">
-                <a href="#" class="header__nav-link">Home</a>
+                <a href="index.jsp" class="header__nav-link">Home</a>
             </li>
             <li class="header__nav-item underline-effect">
-                <a href="#" class="header__nav-link"
+                <a href="products.jsp" class="header__nav-link"
                 >Shop <i class="fa-solid fa-caret-down"></i
                 ></a>
 
@@ -26,7 +26,7 @@
                 </ul>
             </li>
             <li class="header__nav-item underline-effect">
-                <a href="#" class="header__nav-link"
+                <a href="products.jsp" class="header__nav-link"
                 >Category<i class="fa-solid fa-caret-down"></i
                 ></a>
                 <ul class="dropdown-menu-navbar">
@@ -38,7 +38,7 @@
                 </ul>
             </li>
             <li class="header__nav-item underline-effect">
-                <a href="#" class="header__nav-link"
+                <a href="products.jsp" class="header__nav-link"
                 >Popular<i class="fa-solid fa-caret-down"></i
                 ></a>
             </li>

@@ -27,7 +27,7 @@ public class SearchDAO {
         List<Product> allProducts = new ProductDAO().getAllProductsDetails(-1);
 
         for (Product product : allProducts) {
-            if (product.getProduct_name().toLowerCase().contains(searchTerm) || product.getCategory_name().toLowerCase().contains(searchTerm)) {
+            if (product.getProduct_name().toLowerCase().contains(searchTerm) || product.getCategory_name().toLowerCase().contains(searchTerm) || product.getBrand().toLowerCase().contains(searchTerm) || product.getGender().toLowerCase().contains(searchTerm) || product.getDescription().toLowerCase().contains(searchTerm)){
                 matchingProducts.add(product);
             }
         }

@@ -23,12 +23,13 @@
         List<CartItem> cartItems = new CartDAO().getCartItemsByCartId(SessionManager.getCartId(request.getSession()));
         request.setAttribute("cartItems", cartItems);
         request.setAttribute("totalItems", cartItems.size());
+        System.out.println(cartItems.size());
     } else {
-        response.sendRedirect(request.getContextPath() + "/view/index.jsp");
-        return;
+//        response.sendRedirect(request.getContextPath() + "/view/index.jsp");
+//        return;
     }
     } catch (Exception e) {
-        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
+//        response.sendRedirect(request.getContextPath() + "/view/error.jsp");
     }
 %>
 <html>
@@ -54,6 +55,7 @@
     <script defer src="../js/viewProductDetails.js"></script>
     <script defer src="../js/cartPage.js"></script>
     <script defer src="../js/orderProducts.js"></script>
+    <script defer src="../js/searchForm.js"></script>
 
 
 

@@ -419,21 +419,6 @@ const validateAddProductForm = function (formFor="AddProductServlet") {
         }
     });
 
-    // if(formFor === "EditProductServlet"){
-    //     productObject.productId = +btnSubmit.dataset.id;
-    //
-    //     if(!imageChanged){
-    //         productObject.productImage = productInfoObj.image_name;
-    //     }
-    // }
-    // if(formFor === "AddProductServlet" || imageChanged){
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(imageInput.files[0]);
-    //     reader.onload = () => {
-    //         productObject.productImage = reader.result;
-    //     };
-    // }
-
     imagePromise.then(() => {
         const productDataJSON = JSON.stringify(productObject);
 

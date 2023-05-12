@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 	const passwordViewToggler = function () {
 		const btnToggle = document.querySelector(".toggle-password-view");
 		if (!btnToggle) return;
-		const signupForm = document.querySelector(".signup-form");
-		if(!signupForm) return;
-		let passwordInput = signupForm.querySelector("input[type=password]");
+		let loginSignupForm = document.querySelector(".signup-form");
+		if(!loginSignupForm) loginSignupForm = document.querySelector(".login-form");
+		if (!loginSignupForm) return;
+		let passwordInput = loginSignupForm.querySelector("input[type=password]");
 
 		btnToggle.addEventListener("click", function () {
 			const passwordInputType = passwordInput.getAttribute("type");

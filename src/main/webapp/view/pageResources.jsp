@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.wearly.controller.SessionManager" %>
-<%@ page import="com.wearly.model.UserBean" %>
+
 
 
 <jsp:useBean id="userBean" class="com.wearly.model.UserBean" scope="session" />
+<link rel="icon" type="image/gif" href="../images/animated-logo.gif">
 
 
 <meta charset="UTF-8" />
@@ -25,6 +26,8 @@
         rel="stylesheet"
 />
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+<%--//Using Beans to get user information--%>
 <%
     boolean isLoggedIn = SessionManager.isLoggedIn(session);
     String userType = "";

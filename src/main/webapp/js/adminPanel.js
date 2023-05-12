@@ -223,15 +223,8 @@ document.querySelectorAll(".btn--deleteProduct").forEach((btn) => {
         e.preventDefault();
         const productId = e.target.dataset.id;
         const productRow = e.target.closest("tr");
-        fetch(`http://localhost:8080/wearly-ecommerce/DeleteProductServlet?productId=${productId}`, {
-            method: "get",
-        }).then((response) => {
-            if(response.status===200){
-                productRow.remove();
-            } else{
-                console.log("Response not OK");
-            }
-        });
+        deleteProduct(productId, productRow);
+
     })
 });
 //------------------------------------------------//
